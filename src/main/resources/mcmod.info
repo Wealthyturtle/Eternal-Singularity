@@ -1,0 +1,15 @@
+[
+{
+  "modid": "eternalsingularity",
+  "name": "Eternal Singularity",
+  "description": "A mod that adds an eternal singularity!",
+  "version": "1.0.0",
+  "mcversion": "1.7.10",
+  "url": "https://minecraft.curseforge.com/projects/universal-singularities",
+  "updateUrl": "",
+  "authorList": ["Wealthyturtle, WanionCane"],
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
