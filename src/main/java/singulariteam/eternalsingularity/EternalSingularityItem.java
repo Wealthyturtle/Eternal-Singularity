@@ -25,6 +25,7 @@ public class EternalSingularityItem extends Item implements IHaloRenderItem, ICo
 {
 	private IIcon cosmicMask;
 	private IIcon foregroundIcon;
+	private IIcon haloIcon;
 
 	public EternalSingularityItem()
 	{
@@ -70,6 +71,7 @@ public class EternalSingularityItem extends Item implements IHaloRenderItem, ICo
 
         this.cosmicMask = ir.registerIcon("eternalsingularity:eternal_singularity_mask");
         this.foregroundIcon = ir.registerIcon("eternalsingularity:eternal_singularity");
+        this.haloIcon = ir.registerIcon("eternalsingularity:halofire");
     }
 
     @Override
@@ -99,12 +101,12 @@ public class EternalSingularityItem extends Item implements IHaloRenderItem, ICo
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getHaloTexture(ItemStack paramItemStack) {
-		return ((ItemResource)LudicrousItems.resource).halo[0];
+		return haloIcon;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public int getHaloSize(ItemStack paramItemStack) {
-		return 30;
+		return 20;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -114,6 +116,6 @@ public class EternalSingularityItem extends Item implements IHaloRenderItem, ICo
 
 	@SideOnly(Side.CLIENT)
 	public int getHaloColour(ItemStack paramItemStack) {
-		return 0xFF20DB9A;
+		return 0xFFFFFFFF;
 	}
 }
