@@ -8,3 +8,8 @@ src/META-INF/
 /*.iws
 /*.ipr
 /*.iml
+bin/
+.classpath
+.project
+.settings/
+gradle/

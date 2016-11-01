@@ -39,7 +39,7 @@ public class EternalSingularityItem extends Item implements IHaloRenderItem, ICo
 	@Override
 	public String getUnlocalizedName(final ItemStack stack)
 	{
-		return "item.eternal_singularity";
+		return "item.eternal.singularity";
 	}
 
 	@Override
