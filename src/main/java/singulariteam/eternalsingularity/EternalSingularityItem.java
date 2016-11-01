@@ -5,12 +5,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 import fox.spiteful.avaritia.Avaritia;
 import fox.spiteful.avaritia.entity.EntityImmortalItem;
 import fox.spiteful.avaritia.items.ItemResource;
-import fox.spiteful.avaritia.items.ItemSingularity;
 import fox.spiteful.avaritia.items.LudicrousItems;
 import fox.spiteful.avaritia.render.ICosmicRenderItem;
 import fox.spiteful.avaritia.render.IHaloRenderItem;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -19,20 +17,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import java.util.List;
-
 public class EternalSingularityItem extends Item implements IHaloRenderItem, ICosmicRenderItem
 {
+	public static final EternalSingularityItem instance = new EternalSingularityItem();
+
 	private IIcon cosmicMask;
 	private IIcon foregroundIcon;
-	private IIcon haloIcon;
 
-	public EternalSingularityItem()
+	private EternalSingularityItem()
 	{
 		super();
 		setCreativeTab(Avaritia.tab);
 		setTextureName("eternalsingularity:eternal_singularity2");
-		setUnlocalizedName(Reference.MOD_ID + ".eternal.singularity");
 	}
 
 	public EnumRarity getRarity(ItemStack stack)
@@ -52,41 +48,41 @@ public class EternalSingularityItem extends Item implements IHaloRenderItem, ICo
 		return true;
 	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getMaskTexture(ItemStack stack, EntityPlayer player) {
-        return cosmicMask;
-    }
-    
-    @Override
+	@Override
 	@SideOnly(Side.CLIENT)
-	public float getMaskMultiplier(ItemStack stack, EntityPlayer player) {
+	public IIcon getMaskTexture(ItemStack stack, EntityPlayer player)
+	{
+		return cosmicMask;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public float getMaskMultiplier(ItemStack stack, EntityPlayer player)
+	{
 		return 1.0f;
 	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerIcons(IIconRegister ir) {
-        super.registerIcons(ir);
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerIcons(IIconRegister ir)
+	{
+		super.registerIcons(ir);
+		this.cosmicMask = ir.registerIcon("eternalsingularity:eternal_singularity_mask");
+		this.foregroundIcon = ir.registerIcon("eternalsingularity:eternal_singularity");
+	}
 
-        this.cosmicMask = ir.registerIcon("eternalsingularity:eternal_singularity_mask");
-        this.foregroundIcon = ir.registerIcon("eternalsingularity:eternal_singularity");
-        this.haloIcon = ir.registerIcon("eternalsingularity:halofire");
-    }
+	@Override
+	public IIcon getIcon(ItemStack stack, int pass)
+	{
+		return pass == 1 ? foregroundIcon : super.getIcon(stack, pass);
+	}
 
-    @Override
-    public IIcon getIcon(ItemStack stack, int pass){
-    	if (pass == 1) { return this.foregroundIcon; }
-
-    	return super.getIcon(stack, pass);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean requiresMultipleRenderPasses()
-    {
-        return true;
-}
+	@SideOnly(Side.CLIENT)
+	@Override
+	public boolean requiresMultipleRenderPasses()
+	{
+		return true;
+	}
 
 	@Override
 	public Entity createEntity(World world, Entity location, ItemStack itemstack)
@@ -95,27 +91,32 @@ public class EternalSingularityItem extends Item implements IHaloRenderItem, ICo
 	}
 
 	@SideOnly(Side.CLIENT)
-	public boolean drawHalo(ItemStack paramItemStack) {
+	public boolean drawHalo(ItemStack paramItemStack)
+	{
 		return true;
 	}
 
 	@SideOnly(Side.CLIENT)
-	public IIcon getHaloTexture(ItemStack paramItemStack) {
-		return haloIcon;
+	public IIcon getHaloTexture(ItemStack paramItemStack)
+	{
+		return ((ItemResource) LudicrousItems.resource).halo[0];
 	}
 
 	@SideOnly(Side.CLIENT)
-	public int getHaloSize(ItemStack paramItemStack) {
-		return 20;
+	public int getHaloSize(ItemStack paramItemStack)
+	{
+		return 4;
 	}
 
 	@SideOnly(Side.CLIENT)
-	public boolean drawPulseEffect(ItemStack paramItemStack) {
-		return true;
+	public boolean drawPulseEffect(ItemStack paramItemStack)
+	{
+		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
-	public int getHaloColour(ItemStack paramItemStack) {
-		return 0xFFFFFFFF;
+	public int getHaloColour(ItemStack paramItemStack)
+	{
+		return -16777216;
 	}
 }

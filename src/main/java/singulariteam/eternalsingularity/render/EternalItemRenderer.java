@@ -1,11 +1,5 @@
 package singulariteam.eternalsingularity.render;
 
-import java.util.Random;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import fox.spiteful.avaritia.Lumberjack;
 import fox.spiteful.avaritia.render.CosmicRenderShenanigans;
 import fox.spiteful.avaritia.render.ICosmicRenderItem;
 import fox.spiteful.avaritia.render.IHaloRenderItem;
@@ -20,8 +14,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
-//import net.minecraft.util.WeightedRandom.Item;
 import net.minecraftforge.client.IItemRenderer;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import java.util.Random;
 
 public class EternalItemRenderer  implements IItemRenderer {
 	
