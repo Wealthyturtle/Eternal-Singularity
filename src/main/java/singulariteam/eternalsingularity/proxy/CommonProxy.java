@@ -1,6 +1,7 @@
 package singulariteam.eternalsingularity.proxy;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import fox.spiteful.avaritia.crafting.ExtremeCraftingManager;
 import fox.spiteful.avaritia.crafting.Grinder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,7 +27,7 @@ public class CommonProxy
 		final Configuration config = new Configuration(file);
 		final List<String> classNameList = Arrays.asList(config.getStringList("classNameList", Configuration.CATEGORY_GENERAL, new String[]{
 				"com.rcx.aobdsingularities.item.AOBDItemSingularity",
-				"fox.spiteful.avaritia.items",
+				"fox.spiteful.avaritia.items.ItemSingularity",
 				"wanion.thermsingul.ThermalSingularityItem",
 				"wealthyturtle.uiesingularities.UniversalSingularityItem"
 		}, "here is the absolute class name of the Item Classes that must be removed from Infinity Catalyst recipe and inserted into Eternal Singularity."));
@@ -42,10 +43,12 @@ public class CommonProxy
 
 	public void init() {}
 
+	@SuppressWarnings("unchecked")
 	public final void postInit()
 	{
 		if (craftingOnly)
 			return;
+		ExtremeCraftingManager.getInstance().getRecipeList().add(eternalSingularityRecipe);
 		for (final Iterator<Object> catalystRecipeIterator = Grinder.catalyst.getInput().iterator(); catalystRecipeIterator.hasNext();) {
 			final Object input = catalystRecipeIterator.next();
 			if (!(input instanceof ItemStack))

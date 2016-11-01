@@ -10,7 +10,7 @@ import singulariteam.eternalsingularity.proxy.CommonProxy;
 
 import static singulariteam.eternalsingularity.Reference.*;
 
-@Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, acceptedMinecraftVersions = MC_VERSION, dependencies = "required-after:Avaritia")
+@Mod(modid = MOD_ID, name = MOD_NAME, version = MOD_VERSION, acceptedMinecraftVersions = MC_VERSION, dependencies = "required-after:Avaritia;after:thermsingul;after:universalsingularities;after:aobdsingularities")
 public class EternalSingularityMod
 {
 	@Mod.Instance(MOD_ID)
