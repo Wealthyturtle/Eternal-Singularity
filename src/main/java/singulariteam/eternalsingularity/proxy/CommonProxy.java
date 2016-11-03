@@ -25,12 +25,14 @@ public class CommonProxy
 	public final void preInit(final File file)
 	{
 		final Configuration config = new Configuration(file);
-		final List<String> classNameList = Arrays.asList(config.getStringList("classNameList", Configuration.CATEGORY_GENERAL, new String[]{
+		final String[] classNameList = config.getStringList("classNameList", Configuration.CATEGORY_GENERAL, new String[]{
 				"com.rcx.aobdsingularities.item.AOBDItemSingularity",
 				"fox.spiteful.avaritia.items.ItemSingularity",
 				"wanion.thermsingul.ThermalSingularityItem",
 				"wealthyturtle.uiesingularities.UniversalSingularityItem"
-		}, "here is the absolute class name of the Item Classes that must be removed from Infinity Catalyst recipe and inserted into Eternal Singularity."));
+		}, "here is the absolute class name of the Item Classes that must be removed from Infinity Catalyst recipe and inserted into Eternal Singularity.");
+		if (config.hasChanged())
+			config.save();
 		for (final String className : classNameList) {
 			try {
 				classSet.add(Class.forName(className));
@@ -46,7 +48,7 @@ public class CommonProxy
 	@SuppressWarnings("unchecked")
 	public final void postInit()
 	{
-		if (craftingOnly)
+		if (classSet.isEmpty() || craftingOnly)
 			return;
 		ExtremeCraftingManager.getInstance().getRecipeList().add(eternalSingularityRecipe);
 		for (final Iterator<Object> catalystRecipeIterator = Grinder.catalyst.getInput().iterator(); catalystRecipeIterator.hasNext();) {
