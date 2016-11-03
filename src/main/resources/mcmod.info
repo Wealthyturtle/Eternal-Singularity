@@ -3,12 +3,12 @@
   "modid": "eternalsingularity",
   "name": "Eternal Singularity",
   "description": "A Mod that Adds an Eternal Singularity! (That Works as a Singularity Binder)",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "mcversion": "1.7.10",
   "url": "https://minecraft.curseforge.com/projects/eternal-singularity",
   "updateUrl": "",
   "authorList": ["RCXcrafter, WanionCane, Wealthyturtle"],
-  "logoFile": "",
+  "logoFile": "EternalSingularityLogo.png",
   "screenshots": [],
   "dependencies": []
 }
