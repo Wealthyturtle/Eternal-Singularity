@@ -1,4 +1,4 @@
-package wanion.biggercraftingtables.minetweaker;
+package singulariteam.eternalsingularity;
 
 /*
  * Created by WanionCane(https://github.com/WanionCane).
