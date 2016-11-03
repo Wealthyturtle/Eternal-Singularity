@@ -1,13 +1,5 @@
 package singulariteam.eternalsingularity;
 
-/*
- * Created by WanionCane(https://github.com/WanionCane).
- *
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
- */
-
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IItemStack;
@@ -26,9 +18,7 @@ public final class EternalRecipeTweaker
 {
 	private static final List<Object> eternalSingularityRecipe = CommonProxy.eternalSingularityRecipe.getInput();
 
-	private EternalRecipeTweaker()
-	{
-	}
+	private EternalRecipeTweaker() {}
 
 	public static void init()
 	{
