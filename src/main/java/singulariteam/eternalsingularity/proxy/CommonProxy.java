@@ -1,5 +1,6 @@
 package singulariteam.eternalsingularity.proxy;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import fox.spiteful.avaritia.crafting.ExtremeCraftingManager;
 import fox.spiteful.avaritia.crafting.Grinder;
@@ -7,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import singulariteam.eternalsingularity.EternalRecipeTweaker;
 import singulariteam.eternalsingularity.EternalSingularityItem;
 import singulariteam.eternalsingularity.EternalSingularityMod;
 
@@ -41,6 +43,8 @@ public class CommonProxy
 			}
 		}
 		GameRegistry.registerItem(EternalSingularityItem.instance, "eternal_singularity");
+		if (Loader.isModLoaded("MineTweaker3"))
+			EternalRecipeTweaker.init();
 	}
 
 	public void init() {}
