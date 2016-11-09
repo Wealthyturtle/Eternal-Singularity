@@ -1,7 +1,8 @@
 package singulariteam.eternalsingularity.proxy;
 
 import net.minecraftforge.client.MinecraftForgeClient;
-import singulariteam.eternalsingularity.EternalSingularityItem;
+import singulariteam.eternalsingularity.item.CombinedSingularityItem;
+import singulariteam.eternalsingularity.item.EternalSingularityItem;
 import singulariteam.eternalsingularity.render.EternalItemRenderer;
 
 public final class ClientProxy extends CommonProxy
@@ -9,6 +10,8 @@ public final class ClientProxy extends CommonProxy
 	@Override
 	public void init()
 	{
-		MinecraftForgeClient.registerItemRenderer(EternalSingularityItem.instance, new EternalItemRenderer());
+		EternalItemRenderer fancies = new EternalItemRenderer();
+		MinecraftForgeClient.registerItemRenderer(EternalSingularityItem.instance, fancies);
+		MinecraftForgeClient.registerItemRenderer(CombinedSingularityItem.instance, fancies);
 	}
 }

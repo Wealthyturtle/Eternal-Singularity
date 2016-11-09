@@ -1,51 +1,59 @@
-package singulariteam.eternalsingularity;
+package singulariteam.eternalsingularity.item;
+
+import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fox.spiteful.avaritia.Avaritia;
-import fox.spiteful.avaritia.entity.EntityImmortalItem;
 import fox.spiteful.avaritia.items.ItemResource;
 import fox.spiteful.avaritia.items.LudicrousItems;
 import fox.spiteful.avaritia.render.ICosmicRenderItem;
 import fox.spiteful.avaritia.render.IHaloRenderItem;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
+import net.minecraft.util.MathHelper;
 
-public class EternalSingularityItem extends Item implements IHaloRenderItem, ICosmicRenderItem
+public class CombinedSingularityItem extends Item implements IHaloRenderItem, ICosmicRenderItem
 {
-	public static final EternalSingularityItem instance = new EternalSingularityItem();
+	public static final CombinedSingularityItem instance = new CombinedSingularityItem();
+	
+	public static final int[] types = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 , 11, 12, 13, 14, 15};
 
 	private IIcon cosmicMask;
 	private IIcon foregroundIcon;
 
-	private EternalSingularityItem()
+	private CombinedSingularityItem()
 	{
 		super();
+		setHasSubtypes(true);
+		setMaxDamage(0);
 		setCreativeTab(Avaritia.tab);
-		setTextureName("eternalsingularity:eternal_singularity2");
+		setTextureName("eternalsingularity:combined_singularity2");
 	}
 
 	public EnumRarity getRarity(ItemStack stack)
 	{
-		return LudicrousItems.cosmic;
+		return EnumRarity.uncommon;
 	}
 
 	@Override
 	public String getUnlocalizedName(final ItemStack stack)
 	{
-		return "item.eternal.singularity";
+		int i = MathHelper.clamp_int(stack.getItemDamage(), 0, types.length);
+		return "item.combined.singularity." + types[i];
 	}
-
-	@Override
-	public boolean hasCustomEntity(ItemStack stack)
+	
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
-		return true;
+		for (int j = 0; j < types.length; j++) {
+			list.add(new ItemStack(item, 1, j));
+		}
 	}
 
 	@Override
@@ -67,8 +75,8 @@ public class EternalSingularityItem extends Item implements IHaloRenderItem, ICo
 	public void registerIcons(IIconRegister ir)
 	{
 		super.registerIcons(ir);
-		this.cosmicMask = ir.registerIcon("eternalsingularity:eternal_singularity_mask");
-		this.foregroundIcon = ir.registerIcon("eternalsingularity:eternal_singularity");
+		this.cosmicMask = ir.registerIcon("eternalsingularity:combined_singularity_mask");
+		this.foregroundIcon = ir.registerIcon("eternalsingularity:combined_singularity");
 	}
 
 	@Override
@@ -82,12 +90,6 @@ public class EternalSingularityItem extends Item implements IHaloRenderItem, ICo
 	public boolean requiresMultipleRenderPasses()
 	{
 		return true;
-	}
-
-	@Override
-	public Entity createEntity(World world, Entity location, ItemStack itemstack)
-	{
-		return new EntityImmortalItem(world, location, itemstack);
 	}
 
 	@SideOnly(Side.CLIENT)

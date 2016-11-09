@@ -7,8 +7,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import singulariteam.eternalsingularity.EternalSingularityItem;
 import singulariteam.eternalsingularity.EternalSingularityMod;
+import singulariteam.eternalsingularity.item.CombinedSingularityItem;
+import singulariteam.eternalsingularity.item.EternalSingularityItem;
 
 import java.io.File;
 import java.util.*;
@@ -41,6 +42,7 @@ public class CommonProxy
 			}
 		}
 		GameRegistry.registerItem(EternalSingularityItem.instance, "eternal_singularity");
+		GameRegistry.registerItem(CombinedSingularityItem.instance, "combined_singularity");
 	}
 
 	public void init() {}
