@@ -25,7 +25,10 @@ public class CombinedSingularityItem extends Item implements IHaloRenderItem, IC
 	public static final int[] types = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 , 11, 12, 13, 14, 15};
 
 	private IIcon cosmicMask;
-	private IIcon foregroundIcon;
+	@SideOnly(Side.CLIENT)
+	public IIcon[] foregroundIcons;
+	@SideOnly(Side.CLIENT)
+	public IIcon[] backgroundIcons;
 
 	private CombinedSingularityItem()
 	{
@@ -33,7 +36,7 @@ public class CombinedSingularityItem extends Item implements IHaloRenderItem, IC
 		setHasSubtypes(true);
 		setMaxDamage(0);
 		setCreativeTab(Avaritia.tab);
-		setTextureName("eternalsingularity:combined_singularity2");
+		setTextureName("eternalsingularity:combined_singularity_0");
 	}
 
 	public EnumRarity getRarity(ItemStack stack)
@@ -75,14 +78,20 @@ public class CombinedSingularityItem extends Item implements IHaloRenderItem, IC
 	public void registerIcons(IIconRegister ir)
 	{
 		super.registerIcons(ir);
+		foregroundIcons = new IIcon[types.length];
+		backgroundIcons = new IIcon[types.length];
+
+        for (int x = 0; x < types.length; x++) {
+        	foregroundIcons[x] = ir.registerIcon("eternalsingularity:combined_singularity_" + types[x] + "_overlay");
+        	backgroundIcons[x] = ir.registerIcon("eternalsingularity:combined_singularity_" + types[x]);
+        }
 		this.cosmicMask = ir.registerIcon("eternalsingularity:combined_singularity_mask");
-		this.foregroundIcon = ir.registerIcon("eternalsingularity:combined_singularity");
 	}
 
 	@Override
 	public IIcon getIcon(ItemStack stack, int pass)
 	{
-		return pass == 1 ? foregroundIcon : super.getIcon(stack, pass);
+		return pass == 1 ? this.foregroundIcons[stack.getItemDamage() % foregroundIcons.length] : this.backgroundIcons[stack.getItemDamage() % backgroundIcons.length];
 	}
 
 	@SideOnly(Side.CLIENT)
