@@ -10,7 +10,7 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import singulariteam.eternalsingularity.EternalRecipeTweaker;
 import singulariteam.eternalsingularity.EternalSingularityMod;
-import singulariteam.eternalsingularity.item.CombinedSingularityItem;
+import singulariteam.eternalsingularity.item.CompoundSingularityItem;
 import singulariteam.eternalsingularity.item.EternalSingularityItem;
 
 import java.io.File;
@@ -22,12 +22,14 @@ public class CommonProxy
 {
 	public static final ShapelessOreRecipe eternalSingularityRecipe = new ShapelessOreRecipe(EternalSingularityItem.instance);
 	private static final Set<Class> classSet = new HashSet<>();
+	protected CompoundSingularityItem compoundSingularityItem = null;
+	private File configFile;
 
 	public CommonProxy() {}
 
 	public final void preInit(final File file)
 	{
-		final Configuration config = new Configuration(file);
+		final Configuration config = new Configuration(configFile = file);
 		final String[] classNameList = config.getStringList("classNameList", Configuration.CATEGORY_GENERAL, new String[]{
 				"com.rcx.aobdsingularities.item.AOBDItemSingularity",
 				"fox.spiteful.avaritia.items.ItemSingularity",
@@ -44,7 +46,6 @@ public class CommonProxy
 			}
 		}
 		GameRegistry.registerItem(EternalSingularityItem.instance, "eternal_singularity");
-		GameRegistry.registerItem(CombinedSingularityItem.instance, "combined_singularity");
 		if (Loader.isModLoaded("MineTweaker3"))
 			EternalRecipeTweaker.init();
 	}
@@ -57,7 +58,7 @@ public class CommonProxy
 		if (classSet.isEmpty() || craftingOnly)
 			return;
 		ExtremeCraftingManager.getInstance().getRecipeList().add(eternalSingularityRecipe);
-		for (final Iterator<Object> catalystRecipeIterator = Grinder.catalyst.getInput().iterator(); catalystRecipeIterator.hasNext();) {
+		for (final Iterator<Object> catalystRecipeIterator = Grinder.catalyst.getInput().iterator(); catalystRecipeIterator.hasNext(); ) {
 			final Object input = catalystRecipeIterator.next();
 			if (!(input instanceof ItemStack))
 				continue;
@@ -67,6 +68,33 @@ public class CommonProxy
 				eternalSingularityRecipe.getInput().add(((ItemStack) input).copy());
 			}
 		}
+		final Configuration config = new Configuration(configFile);
+		final int singularityCount = eternalSingularityRecipe.getInput().size();
+		final boolean aboveTheLimit = singularityCount > 81;
+		final boolean useCompoundSingularities = config.getBoolean("useCompoundSingularities", Configuration.CATEGORY_GENERAL, aboveTheLimit, "When useCompoundSingularities is Enabled, Basic Singularities will Need to be Crafted into Compound Singularities First.\n[If there are > 81 Basic Singularities, this Config Option will be Set to True Automatically]") || singularityCount > 81;
+		if (useCompoundSingularities) {
+			final int compoundMax = (int) Math.ceil(singularityCount / 9);
+			GameRegistry.registerItem(compoundSingularityItem = new CompoundSingularityItem(compoundMax), "combined_singularity");
+			final List<Object> eternalSingularityRecipeInputs = eternalSingularityRecipe.getInput();
+			for (int i = 0; i < compoundMax; i++) {
+				final ShapelessOreRecipe compoundRecipe = new ShapelessOreRecipe(new ItemStack(compoundSingularityItem, 1, i));
+				for (int s = 0; s < 9; s++) {
+					final int pos = 9 * i + s;
+					if (pos > singularityCount)
+						break;
+					final Object input = eternalSingularityRecipeInputs.get(pos);
+					if (!(input instanceof ItemStack))
+						continue;
+					compoundRecipe.getInput().add(((ItemStack) input).copy());
+				}
+				GameRegistry.addRecipe(compoundRecipe);
+			}
+			eternalSingularityRecipeInputs.clear();
+			for (int i = 0; i < compoundMax; i++)
+				eternalSingularityRecipeInputs.add(new ItemStack(compoundSingularityItem, 1, i));
+		}
+		if (config.hasChanged())
+			config.save();
 		Grinder.catalyst.getInput().add(new ItemStack(EternalSingularityItem.instance));
 	}
 }
