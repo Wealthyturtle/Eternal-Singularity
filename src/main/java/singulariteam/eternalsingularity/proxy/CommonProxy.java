@@ -73,21 +73,22 @@ public class CommonProxy
 		final boolean aboveTheLimit = singularityCount > 81;
 		final boolean useCompoundSingularities = config.getBoolean("useCompoundSingularities", Configuration.CATEGORY_GENERAL, aboveTheLimit, "When useCompoundSingularities is Enabled, Basic Singularities will Need to be Crafted into Compound Singularities First.\n[If there are > 81 Basic Singularities, this Config Option will be Set to True Automatically]") || singularityCount > 81;
 		if (useCompoundSingularities) {
-			final int compoundMax = (int) Math.ceil(singularityCount / 9);
-			GameRegistry.registerItem(compoundSingularityItem = new CompoundSingularityItem(compoundMax), "combined_singularity");
+			final int compoundMax = (int )Math.ceil((float) singularityCount / 9);
+			GameRegistry.registerItem(compoundSingularityItem = new CompoundSingularityItem((int)compoundMax), "combined_singularity");
 			final List<Object> eternalSingularityRecipeInputs = eternalSingularityRecipe.getInput();
 			for (int i = 0; i < compoundMax; i++) {
 				final ShapelessOreRecipe compoundRecipe = new ShapelessOreRecipe(new ItemStack(compoundSingularityItem, 1, i));
 				for (int s = 0; s < 9; s++) {
 					final int pos = 9 * i + s;
-					if (pos > singularityCount)
+					if (pos > singularityCount -1)
 						break;
 					final Object input = eternalSingularityRecipeInputs.get(pos);
 					if (!(input instanceof ItemStack))
 						continue;
 					compoundRecipe.getInput().add(((ItemStack) input).copy());
 				}
-				GameRegistry.addRecipe(compoundRecipe);
+				if (compoundRecipe.getInput().size() > 0)
+					GameRegistry.addRecipe(compoundRecipe);
 			}
 			eternalSingularityRecipeInputs.clear();
 			for (int i = 0; i < compoundMax; i++)
