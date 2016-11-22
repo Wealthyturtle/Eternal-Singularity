@@ -1,6 +1,6 @@
 package singulariteam.eternalsingularity.render;
 
-import fox.spiteful.avaritia.Lumberjack;
+//import fox.spiteful.avaritia.Lumberjack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import org.apache.logging.log4j.Level;
@@ -16,7 +16,7 @@ import java.io.InputStreamReader;
 public final class ShaderHelper {
 	private static final int VERT = ARBVertexShader.GL_VERTEX_SHADER_ARB;
 	private static final int FRAG = ARBFragmentShader.GL_FRAGMENT_SHADER_ARB;
-	private static final String PREFIX = "/assets/uiesingularities/shader/";
+	private static final String PREFIX = "/assets/eternalsingularity/shader/";
 
 	public static int cosmicShader = 0;
 
@@ -78,13 +78,13 @@ public final class ShaderHelper {
 
 		ARBShaderObjects.glLinkProgramARB(program);
 		if(ARBShaderObjects.glGetObjectParameteriARB(program, ARBShaderObjects.GL_OBJECT_LINK_STATUS_ARB) == GL11.GL_FALSE) {
-			Lumberjack.log(Level.ERROR, getLogInfo(program));
+			//Lumberjack.log(Level.ERROR, getLogInfo(program));
 			return 0;
 		}
 
 		ARBShaderObjects.glValidateProgramARB(program);
 		if (ARBShaderObjects.glGetObjectParameteriARB(program, ARBShaderObjects.GL_OBJECT_VALIDATE_STATUS_ARB) == GL11.GL_FALSE) {
-			Lumberjack.log(Level.ERROR, getLogInfo(program));
+			//Lumberjack.log(Level.ERROR, getLogInfo(program));
 			return 0;
 		}
 

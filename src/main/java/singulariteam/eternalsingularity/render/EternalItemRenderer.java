@@ -1,6 +1,5 @@
 package singulariteam.eternalsingularity.render;
 
-import fox.spiteful.avaritia.render.CosmicRenderShenanigans;
 import fox.spiteful.avaritia.render.ICosmicRenderItem;
 import fox.spiteful.avaritia.render.IHaloRenderItem;
 import net.minecraft.client.Minecraft;
@@ -158,9 +157,9 @@ public class EternalItemRenderer  implements IItemRenderer {
 				
 				ICosmicRenderItem icri = (ICosmicRenderItem)(item.getItem());
 				
-				CosmicRenderShenanigans.cosmicOpacity = icri.getMaskMultiplier(item, null);
-				CosmicRenderShenanigans.inventoryRender = true;
-				CosmicRenderShenanigans.useShader();
+				CosmicRenderStuffs.cosmicOpacity = icri.getMaskMultiplier(item, null);
+				CosmicRenderStuffs.inventoryRender = true;
+				CosmicRenderStuffs.useShader();
 				
 				IIcon cosmicicon = icri.getMaskTexture(item, null);
 				
@@ -178,8 +177,8 @@ public class EternalItemRenderer  implements IItemRenderer {
 				t.addVertexWithUV(16, 0, 0, maxu, minv);
 				t.draw();
 				
-				CosmicRenderShenanigans.releaseShader();
-				CosmicRenderShenanigans.inventoryRender = false;
+				CosmicRenderStuffs.releaseShader();
+				CosmicRenderStuffs.inventoryRender = false;
 			}
 			
 			GL11.glEnable(GL11.GL_ALPHA_TEST);
@@ -231,10 +230,10 @@ public class EternalItemRenderer  implements IItemRenderer {
     		f3 = icon.getMaxV();
         	
             int colour = item.getItem().getColorFromItemStack(item, i);
-            r = (float)(colour >> 16 & 255) / 255.0F;
-            g = (float)(colour >> 8 & 255) / 255.0F;
+            r = (float)(colour & 255) / 255.0F;
+            g = (float)(colour & 255) / 255.0F;
             b = (float)(colour & 255) / 255.0F;
-            GL11.glColor4f(r, g, b, 1.0F);
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             ItemRenderer.renderItemIn2D(Tessellator.instance, f1, f2, f, f3, icon.getIconWidth(), icon.getIconHeight(), scale);
         }
 		
@@ -242,8 +241,8 @@ public class EternalItemRenderer  implements IItemRenderer {
 			GL11.glDisable(GL11.GL_ALPHA_TEST);
 			GL11.glDepthFunc(GL11.GL_EQUAL);
 			ICosmicRenderItem icri = (ICosmicRenderItem)(item.getItem());
-			CosmicRenderShenanigans.cosmicOpacity = icri.getMaskMultiplier(item, player);
-			CosmicRenderShenanigans.useShader();
+			CosmicRenderStuffs.cosmicOpacity = icri.getMaskMultiplier(item, player);
+			CosmicRenderStuffs.useShader();
 			
 			IIcon cosmicicon = icri.getMaskTexture(item, player);
 			
@@ -252,7 +251,7 @@ public class EternalItemRenderer  implements IItemRenderer {
 			float minv = cosmicicon.getMinV();
 			float maxv = cosmicicon.getMaxV();
 			ItemRenderer.renderItemIn2D(Tessellator.instance, maxu, minv, minu, maxv, cosmicicon.getIconWidth(), cosmicicon.getIconHeight(), scale);
-			CosmicRenderShenanigans.releaseShader();
+			CosmicRenderStuffs.releaseShader();
 			GL11.glDepthFunc(GL11.GL_LEQUAL);
 			GL11.glEnable(GL11.GL_ALPHA_TEST);
 		}
@@ -268,30 +267,30 @@ public class EternalItemRenderer  implements IItemRenderer {
 		case ENTITY : {
 			EntityItem ent = (EntityItem)(data[1]);
 			if (ent != null) {
-				CosmicRenderShenanigans.setLightFromLocation(ent.worldObj, MathHelper.floor_double(ent.posX), MathHelper.floor_double(ent.posY), MathHelper.floor_double(ent.posZ));
+				CosmicRenderStuffs.setLightFromLocation(ent.worldObj, MathHelper.floor_double(ent.posX), MathHelper.floor_double(ent.posY), MathHelper.floor_double(ent.posZ));
 			}
 			break;
 		}
 		case EQUIPPED : {
 			EntityLivingBase ent = (EntityLivingBase)(data[1]);
 			if (ent != null) {
-				CosmicRenderShenanigans.setLightFromLocation(ent.worldObj, MathHelper.floor_double(ent.posX), MathHelper.floor_double(ent.posY), MathHelper.floor_double(ent.posZ));
+				CosmicRenderStuffs.setLightFromLocation(ent.worldObj, MathHelper.floor_double(ent.posX), MathHelper.floor_double(ent.posY), MathHelper.floor_double(ent.posZ));
 			}
 			break;
 		}
 		case EQUIPPED_FIRST_PERSON : {
 			EntityLivingBase ent = (EntityLivingBase)(data[1]);
 			if (ent != null) {
-				CosmicRenderShenanigans.setLightFromLocation(ent.worldObj, MathHelper.floor_double(ent.posX), MathHelper.floor_double(ent.posY), MathHelper.floor_double(ent.posZ));
+				CosmicRenderStuffs.setLightFromLocation(ent.worldObj, MathHelper.floor_double(ent.posX), MathHelper.floor_double(ent.posY), MathHelper.floor_double(ent.posZ));
 			}
 			break;
 		}
 		case INVENTORY: {
-			CosmicRenderShenanigans.setLightLevel(1.2f);
+			CosmicRenderStuffs.setLightLevel(1.2f);
 			return;
 		}
 		default : {
-	        CosmicRenderShenanigans.setLightLevel(1.0f);
+			CosmicRenderStuffs.setLightLevel(1.0f);
 			return;
 		}
 		}
