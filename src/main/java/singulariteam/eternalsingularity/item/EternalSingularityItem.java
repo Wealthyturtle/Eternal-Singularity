@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import singulariteam.eternalsingularity.EternalSingularityMod;
 
 public class EternalSingularityItem extends Item implements IHaloRenderItem, ICosmicRenderItem
 {
@@ -27,7 +28,7 @@ public class EternalSingularityItem extends Item implements IHaloRenderItem, ICo
 	private EternalSingularityItem()
 	{
 		super();
-		setCreativeTab(Avaritia.tab);
+		setCreativeTab(EternalSingularityMod.creativeTabs);
 		setTextureName("eternalsingularity:eternal_singularity2");
 	}
 

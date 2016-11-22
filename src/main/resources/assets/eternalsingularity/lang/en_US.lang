@@ -3,35 +3,38 @@
 
 //Contact RCXcrafter/WanionCane/Wealthyturtle If You Would Like to Volunteer to Create a Localization File for Another Language.
 
+//Creative Tab
+itemGroup.eternalsingularity=Eternal Singularity
+//Creative Tab
+
 //Eternal Singularity - OMG
 item.eternal.singularity.name=Eternal Singularity
 //Eternal Singularity - OMG
 
+//Used Combined Singularity - Semi-OMG
 item.combined.singularity.0.name=Nitronic Singularity
-item.combined.singularity.1.name= Singularity
+item.combined.singularity.1.name=Psychotic Singularity
 item.combined.singularity.2.name=Sphaghettic Singularity
-item.combined.singularity.3.name= Singularity
-item.combined.singularity.4.name= Singularity
-item.combined.singularity.5.name= Singularity
-item.combined.singularity.6.name= Singularity
-item.combined.singularity.7.name= Singularity
-item.combined.singularity.8.name= Singularity
-item.combined.singularity.9.name= Singularity
-item.combined.singularity.10.name= Singularity
-item.combined.singularity.11.name= Singularity
-item.combined.singularity.12.name= Singularity
-item.combined.singularity.13.name= Singularity
-item.combined.singularity.14.name= Singularity
-item.combined.singularity.15.name= Singularity
+item.combined.singularity.3.name=Pneumatic Singularity
+item.combined.singularity.4.name=Cryptic Singularity
+item.combined.singularity.5.name=Historic Singularity
+item.combined.singularity.6.name=Meteoric Singularity
+item.combined.singularity.7.name=Gastronomic Singularity
+item.combined.singularity.8.name=Chromatic Singularity
+item.combined.singularity.9.name=Prismatic Singularity
+item.combined.singularity.10.name=Robotic Singularity
+item.combined.singularity.11.name=Galactic Singularity
+item.combined.singularity.12.name=Hydrolic Singularity
+item.combined.singularity.13.name=Geologic Singularity
+item.combined.singularity.14.name=Angelic Singularity
+item.combined.singularity.15.name=Chronic Singularity
+//Used Combined Singularity - Semi-OMG
 
-//unused
-//Psychotic Singularity
+//Unused Combined Singularities
 //Specific Singularity
 //Awesome Singularity
 //Gracious Singularity
 //Natural Singularity
-//Meteoric Singularity
-//Historic Singularity
 //Amazing Singularity
 //Annual Singularity
 //Pacific Singularity
@@ -40,7 +43,6 @@ item.combined.singularity.15.name= Singularity
 //Smelly Singularity
 //Magnificent Singularity
 //Macaronic Singularity
-//Robotic Singularity
 //Rhubarbic Singularity
 //Metric Singularity
 //Magical Singularity
@@ -49,10 +51,7 @@ item.combined.singularity.15.name= Singularity
 //Ironic Singularity
 //Fantastic Singularity
 //Archanic Singularity
-//Pneumatic Singularity
 //Electric Singularity
-//Angelic Singularity
-//Chronic Singularity
 //Chemical Singularity
 //Thermionic Singularity
 //Protonic Singularity
@@ -61,8 +60,6 @@ item.combined.singularity.15.name= Singularity
 //Radial Singularity
 //Implodic Singularity
 //Platonic Singularity
-//Hydrolic Singularity
-//Prismatic Singularity
 //Magnetic Singularity
 //Traxonic Singularity
 //Cyclonic Singularity
@@ -70,12 +67,8 @@ item.combined.singularity.15.name= Singularity
 //Technical Singularity
 //Astronomic Singularity
 //Flambonic Singularity
-//Gastronomic Singularity
-//Galactic Singularity
-//Cryptic Singularity
 //Analytic Singularity
 //Antique Singularity
-//Chromatic Singularity
 //Octagonal Singularity
 //Majoric Singularity
 //Terrific Singularity

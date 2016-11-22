@@ -17,26 +17,23 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import singulariteam.eternalsingularity.EternalSingularityMod;
 
-public class CombinedSingularityItem extends Item implements IHaloRenderItem, ICosmicRenderItem
+public class CompoundSingularityItem extends Item implements IHaloRenderItem, ICosmicRenderItem
 {
-	public static final CombinedSingularityItem instance = new CombinedSingularityItem();
-	
-	public static final int[] types = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 , 11, 12, 13, 14, 15};
+	private final int max;
 
+	@SideOnly(Side.CLIENT)
 	private IIcon cosmicMask;
 	@SideOnly(Side.CLIENT)
-	public IIcon[] foregroundIcons;
-	@SideOnly(Side.CLIENT)
-	public IIcon[] backgroundIcons;
+	private IIcon[] foregroundIcons, backgroundIcons;
 
-	private CombinedSingularityItem()
+	public CompoundSingularityItem(final int max)
 	{
 		super();
 		setHasSubtypes(true);
-		setMaxDamage(0);
-		setCreativeTab(Avaritia.tab);
-		setTextureName("eternalsingularity:combined_singularity_0");
+		this.max = max;
+		setCreativeTab(EternalSingularityMod.creativeTabs);
 	}
 
 	public EnumRarity getRarity(ItemStack stack)
@@ -47,16 +44,15 @@ public class CombinedSingularityItem extends Item implements IHaloRenderItem, IC
 	@Override
 	public String getUnlocalizedName(final ItemStack stack)
 	{
-		int i = MathHelper.clamp_int(stack.getItemDamage(), 0, types.length);
-		return "item.combined.singularity." + types[i];
+		return "item.combined.singularity." + MathHelper.clamp_int(getDamage(stack), 0, max);
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
-		for (int j = 0; j < types.length; j++) {
+		for (int j = 0; j < max; j++)
 			list.add(new ItemStack(item, 1, j));
-		}
 	}
 
 	@Override
@@ -78,13 +74,13 @@ public class CombinedSingularityItem extends Item implements IHaloRenderItem, IC
 	public void registerIcons(IIconRegister ir)
 	{
 		super.registerIcons(ir);
-		foregroundIcons = new IIcon[types.length];
-		backgroundIcons = new IIcon[types.length];
+		foregroundIcons = new IIcon[max];
+		backgroundIcons = new IIcon[max];
 
-        for (int x = 0; x < types.length; x++) {
-        	foregroundIcons[x] = ir.registerIcon("eternalsingularity:combined_singularity_" + types[x] + "_overlay");
-        	backgroundIcons[x] = ir.registerIcon("eternalsingularity:combined_singularity_" + types[x]);
-        }
+		for (int x = 0; x < max; x++) {
+			foregroundIcons[x] = ir.registerIcon("eternalsingularity:combined_singularity_" + x + "_overlay");
+			backgroundIcons[x] = ir.registerIcon("eternalsingularity:combined_singularity_" + x);
+		}
 		this.cosmicMask = ir.registerIcon("eternalsingularity:combined_singularity_mask");
 	}
 
