@@ -53,7 +53,7 @@ public class CommonProxy
 	public void init() {}
 
 	@SuppressWarnings("unchecked")
-	public final void postInit()
+	public void postInit()
 	{
 		if (classSet.isEmpty() || craftingOnly)
 			return;

@@ -7,13 +7,20 @@ import singulariteam.eternalsingularity.render.ShaderHelper;
 
 public final class ClientProxy extends CommonProxy
 {
+	EternalItemRenderer fancies = new EternalItemRenderer();
+
 	@Override
 	public void init()
 	{
-		EternalItemRenderer fancies = new EternalItemRenderer();
 		MinecraftForgeClient.registerItemRenderer(EternalSingularityItem.instance, fancies);
+		ShaderHelper.initShaders();
+	}
+
+	@Override
+	public void postInit()
+	{
+		super.postInit();
 		if (compoundSingularityItem != null)
 			MinecraftForgeClient.registerItemRenderer(compoundSingularityItem, fancies);
-		ShaderHelper.initShaders();
 	}
 }
