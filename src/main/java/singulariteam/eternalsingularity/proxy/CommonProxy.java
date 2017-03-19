@@ -72,14 +72,16 @@ public class CommonProxy
 		final Configuration config = new Configuration(configFile);
 		final int singularityCount = eternalSingularityRecipe.getInput().size();
 		final boolean aboveTheLimit = singularityCount > 81;
-		final boolean useCompoundSingularities = config.getBoolean("useCompoundSingularities", Configuration.CATEGORY_GENERAL, aboveTheLimit, "When useCompoundSingularities is Enabled, Basic Singularities will Need to be Crafted into Compound Singularities First.\n[If there are > 81 Basic Singularities, this Config Option will be Set to True Automatically]") || singularityCount > 81;
+		final boolean useCompoundSingularities = config.getBoolean("useCompoundSingularities", Configuration.CATEGORY_GENERAL, aboveTheLimit, "When useCompoundSingularities is Enabled, Basic Singularities will Need to be Crafted into Compound Singularities First.\n[If there are > 81 Basic Singularities, this Config Option will be Set to True Automatically]") || aboveTheLimit;
 		final boolean easyMode = config.getBoolean("easyMode", Configuration.CATEGORY_GENERAL, false, "If this Config Option is Enabled, for Every 9 Singularities Used in the Eternal Singularity Recipe, You will Receive an Additional Eternal Singularity for the Recipe Output.");
+		if (config.hasChanged())
+			config.save();
 		final int compoundMax = (int) Math.ceil((float) singularityCount / 9);
 		if (useCompoundSingularities) {
 			GameRegistry.registerItem(compoundSingularityItem = new CompoundSingularityItem(compoundMax), "combined_singularity");
 			final List<Object> eternalSingularityRecipeInputs = eternalSingularityRecipe.getInput();
 			for (int i = 0; i < compoundMax; i++) {
-				final ShapelessOreRecipe compoundRecipe = new ShapelessOreRecipe(new ItemStack(compoundSingularityItem, MathHelper.clamp_int(i, 1, 64)));
+				final ShapelessOreRecipe compoundRecipe = new ShapelessOreRecipe(new ItemStack(compoundSingularityItem, 1, MathHelper.clamp_int(i, 1, 64)));
 				for (int s = 0; s < 9; s++) {
 					final int pos = 9 * i + s;
 					if (pos > singularityCount - 1)
@@ -96,8 +98,6 @@ public class CommonProxy
 			for (int i = 0; i < compoundMax; i++)
 				eternalSingularityRecipeInputs.add(new ItemStack(compoundSingularityItem, 1, i));
 		}
-		if (config.hasChanged())
-			config.save();
-		Grinder.catalyst.getInput().add(new ItemStack(EternalSingularityItem.instance, easyMode ? compoundMax : 1));
+		Grinder.catalyst.getInput().add(new ItemStack(EternalSingularityItem.instance, easyMode ? MathHelper.clamp_int(compoundMax, 1, 64) : 1));
 	}
 }
