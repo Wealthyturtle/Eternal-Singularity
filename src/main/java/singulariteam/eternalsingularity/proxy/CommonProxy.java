@@ -1,12 +1,10 @@
 package singulariteam.eternalsingularity.proxy;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
-import fox.spiteful.avaritia.crafting.ExtremeCraftingManager;
-import fox.spiteful.avaritia.crafting.Grinder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import singulariteam.eternalsingularity.EternalRecipeTweaker;
 import singulariteam.eternalsingularity.EternalSingularityMod;
@@ -16,26 +14,28 @@ import singulariteam.eternalsingularity.item.EternalSingularityItem;
 import java.io.File;
 import java.util.*;
 
-import static fox.spiteful.avaritia.Config.craftingOnly;
+import morph.avaritia.recipe.extreme.ExtremeCraftingManager;
+import morph.avaritia.handler.ConfigHandler;
+import morph.avaritia.init.Recipes;
 
-public class CommonProxy
-{
+public class CommonProxy {
 	public static final ShapelessOreRecipe eternalSingularityRecipe = new ShapelessOreRecipe(EternalSingularityItem.instance);
 	private static final Set<Class> classSet = new HashSet<>();
 	protected CompoundSingularityItem compoundSingularityItem = null;
 	private File configFile;
 
-	public CommonProxy() {}
+	public CommonProxy() {
+	}
 
-	public final void preInit(final File file)
-	{
+	public final void preInit(final File file) {
 		final Configuration config = new Configuration(configFile = file);
-		final String[] classNameList = config.getStringList("classNameList", Configuration.CATEGORY_GENERAL, new String[]{
-				"com.rcx.aobdsingularities.item.AOBDItemSingularity",
-				"fox.spiteful.avaritia.items.ItemSingularity",
-				"wanion.thermsingul.ThermalSingularityItem",
-				"wealthyturtle.uiesingularities.UniversalSingularityItem"
-		}, "here is the absolute class name of the Item Classes that must be removed from Infinity Catalyst recipe and inserted into Eternal Singularity.");
+		final String[] classNameList = config.getStringList("classNameList", Configuration.CATEGORY_GENERAL,
+				new String[] { 
+					"morph.avaritia.item.ItemSingularity",
+					"thelm.jaopcasingularities.ItemSingularityBase",
+					"wanion.thermsingul.ThermalSingularityItem",
+					"wealthyturtle.uiesingularities.UniversalSingularityItem" },
+					"here is the absolute class name of the Item Classes that must be removed from Infinity Catalyst recipe and inserted into Eternal Singularity.");
 		if (config.hasChanged())
 			config.save();
 		for (final String className : classNameList) {
@@ -45,7 +45,8 @@ public class CommonProxy
 				EternalSingularityMod.logger.warn("Couldn't find " + className);
 			}
 		}
-		GameRegistry.registerItem(EternalSingularityItem.instance, "eternal_singularity");
+		GameRegistry.register(EternalSingularityItem.instance);
+		GameRegistry.register(compoundSingularityItem = new CompoundSingularityItem(16));
 		if (Loader.isModLoaded("MineTweaker3"))
 			EternalRecipeTweaker.init();
 	}
@@ -53,12 +54,11 @@ public class CommonProxy
 	public void init() {}
 
 	@SuppressWarnings("unchecked")
-	public void postInit()
-	{
-		if (classSet.isEmpty() || craftingOnly)
+	public void postInit() {
+		if (classSet.isEmpty() || ConfigHandler.craftingOnly)
 			return;
 		ExtremeCraftingManager.getInstance().getRecipeList().add(eternalSingularityRecipe);
-		for (final Iterator<Object> catalystRecipeIterator = Grinder.catalyst.getInput().iterator(); catalystRecipeIterator.hasNext(); ) {
+		for (final Iterator<Object> catalystRecipeIterator = Recipes.catalyst.getInput().iterator(); catalystRecipeIterator.hasNext();) {
 			final Object input = catalystRecipeIterator.next();
 			if (!(input instanceof ItemStack))
 				continue;
@@ -75,7 +75,7 @@ public class CommonProxy
 		final boolean easyMode = config.getBoolean("easyMode", Configuration.CATEGORY_GENERAL, false, "If this Config Option is Enabled, for Every 9 Singularities Used in the Eternal Singularity Recipe, You will Receive an Additional Eternal Singularity for the Recipe Output.");
 		final int compoundMax = (int) Math.ceil((float) singularityCount / 9);
 		if (useCompoundSingularities) {
-			GameRegistry.registerItem(compoundSingularityItem = new CompoundSingularityItem(compoundMax), "combined_singularity");
+			GameRegistry.register(compoundSingularityItem = new CompoundSingularityItem(compoundMax));
 			final List<Object> eternalSingularityRecipeInputs = eternalSingularityRecipe.getInput();
 			for (int i = 0; i < compoundMax; i++) {
 				final ShapelessOreRecipe compoundRecipe = new ShapelessOreRecipe(new ItemStack(compoundSingularityItem, 1, i));
@@ -97,6 +97,6 @@ public class CommonProxy
 		}
 		if (config.hasChanged())
 			config.save();
-		Grinder.catalyst.getInput().add(new ItemStack(EternalSingularityItem.instance, easyMode ? compoundMax : 1));
+		Recipes.catalyst.getInput().add(new ItemStack(EternalSingularityItem.instance, easyMode ? compoundMax : 1));
 	}
 }
