@@ -77,11 +77,12 @@ public class CommonProxy {
 		if (config.hasChanged())
 			config.save();
 		final int compoundMax = (int) Math.ceil((float) singularityCount / 9);
+		compoundSingularityItem.max = 0;
 		if (useCompoundSingularities) {
 			compoundSingularityItem.max = compoundMax;
 			final List<Object> eternalSingularityRecipeInputs = eternalSingularityRecipe.getInput();
 			for (int i = 0; i < compoundMax; i++) {
-				final ShapelessOreRecipe compoundRecipe = new ShapelessOreRecipe(new ItemStack(compoundSingularityItem, 1, MathHelper.clamp_int(i, 1, 64)));
+				final ShapelessOreRecipe compoundRecipe = new ShapelessOreRecipe(new ItemStack(compoundSingularityItem, 1, MathHelper.clamp_int(i, 0, 64)));
 				for (int s = 0; s < 9; s++) {
 					final int pos = 9 * i + s;
 					if (pos > singularityCount - 1)
