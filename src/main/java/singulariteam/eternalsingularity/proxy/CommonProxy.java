@@ -77,6 +77,7 @@ public class CommonProxy {
 		if (config.hasChanged())
 			config.save();
 		final int compoundMax = (int) Math.ceil((float) singularityCount / 9);
+		compoundSingularityItem.max = 0;
 		if (useCompoundSingularities) {
 			compoundSingularityItem.max = compoundMax;
 			final List<Object> eternalSingularityRecipeInputs = eternalSingularityRecipe.getInput();
