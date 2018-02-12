@@ -1,5 +1,6 @@
 package singulariteam.eternalsingularity.item;
 
+import codechicken.lib.item.ItemMultiType;
 import codechicken.lib.model.ModelRegistryHelper;
 import codechicken.lib.util.TransformUtils;
 import morph.avaritia.api.ICosmicRenderItem;
@@ -23,6 +24,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import singulariteam.eternalsingularity.EternalSingularityMod;
 import singulariteam.eternalsingularity.render.EternalItemRender;
+import singulariteam.eternalsingularity.render.EternalTextures;
 
 public class EternalSingularityItem extends Item implements IHaloRenderItem, ICosmicRenderItem, IModelRegister {
 	public static final EternalSingularityItem instance = new EternalSingularityItem();
@@ -59,8 +61,7 @@ public class EternalSingularityItem extends Item implements IHaloRenderItem, ICo
 
 	@Override
 	public TextureAtlasSprite getMaskTexture(ItemStack arg0, EntityLivingBase arg1) {
-		// TODO Auto-generated method stub
-		return null;
+		return EternalTextures.ETERNAL_SINGULARITY_MASK;
 	}
 
 	@Override
@@ -91,7 +92,7 @@ public class EternalSingularityItem extends Item implements IHaloRenderItem, ICo
     @Override
     @SideOnly (Side.CLIENT)
     public void registerModels() {
-        ModelResourceLocation location = new ModelResourceLocation("avaritia:singularity", "type=singularity");
+        ModelResourceLocation location = new ModelResourceLocation("eternalsingularity:singularity_eternal", "type=singularity");
         ModelLoader.registerItemVariants(this, location);
         IBakedModel wrappedModel = new EternalItemRender(TransformUtils.DEFAULT_ITEM, modelRegistry -> modelRegistry.getObject(location));
         ModelRegistryHelper.register(location, wrappedModel);

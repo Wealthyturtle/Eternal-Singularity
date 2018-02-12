@@ -21,14 +21,14 @@ import morph.avaritia.init.Recipes;
 
 public class CommonProxy {
 	public static final ShapelessOreRecipe eternalSingularityRecipe = new ShapelessOreRecipe(EternalSingularityItem.instance);
-	private static final Set<Class> classSet = new HashSet<>();
+	private static final Set<Class> classSet = new HashSet<Class>();
 	protected CompoundSingularityItem compoundSingularityItem = null;
 	private File configFile;
 
 	public CommonProxy() {
 	}
 
-	public final void preInit(final File file) {
+	public void preInit(final File file) {
 		final Configuration config = new Configuration(configFile = file);
 		final String[] classNameList = config.getStringList("classNameList", Configuration.CATEGORY_GENERAL,
 				new String[] { 
@@ -78,7 +78,8 @@ public class CommonProxy {
 			config.save();
 		final int compoundMax = (int) Math.ceil((float) singularityCount / 9);
 		if (useCompoundSingularities) {
-			GameRegistry.register(compoundSingularityItem = new CompoundSingularityItem(compoundMax));
+			//GameRegistry.register(compoundSingularityItem = new CompoundSingularityItem(compoundMax));
+			compoundSingularityItem.max = compoundMax;
 			final List<Object> eternalSingularityRecipeInputs = eternalSingularityRecipe.getInput();
 			for (int i = 0; i < compoundMax; i++) {
 				final ShapelessOreRecipe compoundRecipe = new ShapelessOreRecipe(new ItemStack(compoundSingularityItem, 1, MathHelper.clamp_int(i, 1, 64)));

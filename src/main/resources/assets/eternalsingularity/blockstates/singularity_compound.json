@@ -1,0 +1,114 @@
+{
+	"ccl_marker": 1,
+	"variant_sets": [
+		"type"
+	],
+	"texture_domain": "eternalsingularity",
+	"defaults": {
+		"model": "builtin/generated",
+		"textures": {
+			"layer0": "minecraft:dirt"
+		},
+		"transform": "ccl:default-item"
+	},
+	"variants": {
+		"type": {
+			"singularity0": {
+				"textures": {
+					"layer0": "items/combined_singularity_0",
+					"layer1": "items/combined_singularity_0_overlay"
+				}
+			},
+			"singularity1": {
+				"textures": {
+					"layer0": "items/combined_singularity_1",
+					"layer1": "items/combined_singularity_1_overlay"
+				}
+			},
+			"singularity2": {
+				"textures": {
+					"layer0": "items/combined_singularity_2",
+					"layer1": "items/combined_singularity_2_overlay"
+				}
+			},
+			"singularity3": {
+				"textures": {
+					"layer0": "items/combined_singularity_3",
+					"layer1": "items/combined_singularity_3_overlay"
+				}
+			},
+			"singularity4": {
+				"textures": {
+					"layer0": "items/combined_singularity_4",
+					"layer1": "items/combined_singularity_4_overlay"
+				}
+			},
+			"singularity5": {
+				"textures": {
+					"layer0": "items/combined_singularity_5",
+					"layer1": "items/combined_singularity_5_overlay"
+				}
+			},
+			"singularity6": {
+				"textures": {
+					"layer0": "items/combined_singularity_6",
+					"layer1": "items/combined_singularity_6_overlay"
+				}
+			},
+			"singularity7": {
+				"textures": {
+					"layer0": "items/combined_singularity_7",
+					"layer1": "items/combined_singularity_7_overlay"
+				}
+			},
+			"singularity8": {
+				"textures": {
+					"layer0": "items/combined_singularity_8",
+					"layer1": "items/combined_singularity_8_overlay"
+				}
+			},
+			"singularity9": {
+				"textures": {
+					"layer0": "items/combined_singularity_9",
+					"layer1": "items/combined_singularity_9_overlay"
+				}
+			},
+			"singularity10": {
+				"textures": {
+					"layer0": "items/combined_singularity_10",
+					"layer1": "items/combined_singularity_10_overlay"
+				}
+			},
+			"singularity11": {
+				"textures": {
+					"layer0": "items/combined_singularity_11",
+					"layer1": "items/combined_singularity_11_overlay"
+				}
+			},
+			"singularity12": {
+				"textures": {
+					"layer0": "items/combined_singularity_12",
+					"layer1": "items/combined_singularity_12_overlay"
+				}
+			},
+			"singularity13": {
+				"textures": {
+					"layer0": "items/combined_singularity_13",
+					"layer1": "items/combined_singularity_13_overlay"
+				}
+			},
+			"singularity14": {
+				"textures": {
+					"layer0": "items/combined_singularity_14",
+					"layer1": "items/combined_singularity_14_overlay"
+				}
+			},
+			"singularity15": {
+				"textures": {
+					"layer0": "items/combined_singularity_15",
+					"layer1": "items/combined_singularity_15_overlay"
+				}
+			}
+		}
+	}
+}

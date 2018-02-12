@@ -1,0 +1,24 @@
+{
+	"ccl_marker": 1,
+	"variant_sets": [
+		"type"
+	],
+	"texture_domain": "eternalsingularity",
+	"defaults": {
+		"model": "builtin/generated",
+		"textures": {
+			"layer0": "minecraft:dirt"
+		},
+		"transform": "ccl:default-item"
+	},
+	"variants": {
+		"type": {
+			"singularity": {
+				"textures": {
+					"layer0": "items/eternal_singularity2",
+					"layer1": "items/eternal_singularity"
+				}
+			}
+		}
+	}
+}
