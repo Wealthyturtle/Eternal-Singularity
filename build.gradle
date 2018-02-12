@@ -24,6 +24,11 @@ version = "1.10.2-1.0.3"
 group= "singulariteam.eternalsingularity" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "eternalsingularity"
 
+sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.8"
+}
+
 minecraft {
     version = "1.10.2-12.18.3.2422"
     runDir = "run"

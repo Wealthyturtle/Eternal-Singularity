@@ -1,6 +1,5 @@
 package singulariteam.eternalsingularity.item;
 
-import codechicken.lib.item.ItemMultiType;
 import codechicken.lib.model.ModelRegistryHelper;
 import codechicken.lib.util.TransformUtils;
 import morph.avaritia.api.ICosmicRenderItem;
@@ -14,7 +13,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -89,25 +87,13 @@ public class EternalSingularityItem extends Item implements IHaloRenderItem, ICo
 		return false;
 	}
 
-    @Override
-    @SideOnly (Side.CLIENT)
-    public void registerModels() {
-        ModelResourceLocation location = new ModelResourceLocation("eternalsingularity:singularity_eternal", "type=singularity");
-        ModelLoader.registerItemVariants(this, location);
-        IBakedModel wrappedModel = new EternalItemRender(TransformUtils.DEFAULT_ITEM, modelRegistry -> modelRegistry.getObject(location));
-        ModelRegistryHelper.register(location, wrappedModel);
-        ModelLoader.setCustomMeshDefinition(this, stack -> location);
-    }
-	/*@SideOnly(Side.CLIENT)
 	@Override
-	public void registerIcons(IIconRegister ir) {
-		super.registerIcons(ir);
-		this.cosmicMask = ir.registerIcon("eternalsingularity:eternal_singularity_mask");
-		this.foregroundIcon = ir.registerIcon("eternalsingularity:eternal_singularity");
+	@SideOnly (Side.CLIENT)
+	public void registerModels() {
+		ModelResourceLocation location = new ModelResourceLocation("eternalsingularity:singularity_eternal", "type=singularity");
+		ModelLoader.registerItemVariants(this, location);
+		IBakedModel wrappedModel = new EternalItemRender(TransformUtils.DEFAULT_ITEM, modelRegistry -> modelRegistry.getObject(location));
+		ModelRegistryHelper.register(location, wrappedModel);
+		ModelLoader.setCustomMeshDefinition(this, stack -> location);
 	}
-
-	@Override
-	public IIcon getIcon(ItemStack stack, int pass) {
-		return pass == 1 ? foregroundIcon : super.getIcon(stack, pass);
-	}*/
 }

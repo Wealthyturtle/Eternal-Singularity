@@ -8,14 +8,11 @@ import morph.avaritia.api.ICosmicRenderItem;
 import morph.avaritia.api.IHaloRenderItem;
 import morph.avaritia.api.registration.IModelRegister;
 import morph.avaritia.init.AvaritiaTextures;
-import morph.avaritia.init.ModItems;
-import morph.avaritia.item.ItemResource;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -96,43 +93,13 @@ public class CompoundSingularityItem extends Item implements IHaloRenderItem, IC
 	@Override
 	@SideOnly (Side.CLIENT)
 	public void registerModels() {
-		/*ModelResourceLocation location = new ModelResourceLocation("eternalsingularity:singularity_compound", "type=singularity");
-		ModelLoader.registerItemVariants(this, location);
-		IBakedModel wrappedModel = new EternalItemRender(TransformUtils.DEFAULT_ITEM, modelRegistry -> modelRegistry.getObject(location));
-		ModelRegistryHelper.register(location, wrappedModel);
-		ModelLoader.setCustomMeshDefinition(this, stack -> location);*/
-		
-		//ModItems.resource.registerModelVariants();
-        //Set<Integer> toRegister = Sets.newHashSet(2, 3, 4, 5, 6);
-
-        for (int j = 0; j < max; j++) {
-            final ModelResourceLocation location = new ModelResourceLocation("eternalsingularity:singularity_compound", "type=singularity" + j);
-            ModelLoader.registerItemVariants(this, location);
-            IBakedModel wrappedModel = new EternalItemRender(TransformUtils.DEFAULT_ITEM, modelRegistry -> modelRegistry.getObject(location));
-            ModelRegistryHelper.register(location, wrappedModel);
-            ModelLoader.setCustomMeshDefinition(this, stack -> location);
-            ModelLoader.setCustomModelResourceLocation(this, j, location);
-        }
-	}
-
-	/*@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IIconRegister ir)
-	{
-		super.registerIcons(ir);
-		foregroundIcons = new IIcon[max];
-		backgroundIcons = new IIcon[max];
-
-		for (int x = 0; x < max; x++) {
-			foregroundIcons[x] = ir.registerIcon("eternalsingularity:combined_singularity_" + x + "_overlay");
-			backgroundIcons[x] = ir.registerIcon("eternalsingularity:combined_singularity_" + x);
+		for (int j = 0; j < max; j++) {
+			final ModelResourceLocation location = new ModelResourceLocation("eternalsingularity:singularity_compound", "type=singularity" + j);
+			ModelLoader.registerItemVariants(this, location);
+			IBakedModel wrappedModel = new EternalItemRender(TransformUtils.DEFAULT_ITEM, modelRegistry -> modelRegistry.getObject(location));
+			ModelRegistryHelper.register(location, wrappedModel);
+			ModelLoader.setCustomMeshDefinition(this, stack -> location);
+			ModelLoader.setCustomModelResourceLocation(this, j, location);
 		}
-		this.cosmicMask = ir.registerIcon("eternalsingularity:combined_singularity_mask");
 	}
-
-	@Override
-	public IIcon getIcon(ItemStack stack, int pass)
-	{
-		return pass == 1 ? this.foregroundIcons[stack.getItemDamage() % foregroundIcons.length] : this.backgroundIcons[stack.getItemDamage() % backgroundIcons.length];
-	}*/
 }

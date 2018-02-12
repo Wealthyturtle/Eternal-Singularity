@@ -16,11 +16,12 @@ import java.io.File;
 import java.util.*;
 
 import morph.avaritia.recipe.extreme.ExtremeCraftingManager;
+import morph.avaritia.recipe.extreme.ExtremeShapelessOreRecipe;
 import morph.avaritia.handler.ConfigHandler;
 import morph.avaritia.init.Recipes;
 
 public class CommonProxy {
-	public static final ShapelessOreRecipe eternalSingularityRecipe = new ShapelessOreRecipe(EternalSingularityItem.instance);
+	public static final ExtremeShapelessOreRecipe eternalSingularityRecipe = ExtremeCraftingManager.getInstance().addShapelessOreRecipe(new ItemStack(EternalSingularityItem.instance));
 	private static final Set<Class> classSet = new HashSet<Class>();
 	protected CompoundSingularityItem compoundSingularityItem = null;
 	private File configFile;
@@ -31,9 +32,9 @@ public class CommonProxy {
 	public void preInit(final File file) {
 		final Configuration config = new Configuration(configFile = file);
 		final String[] classNameList = config.getStringList("classNameList", Configuration.CATEGORY_GENERAL,
-				new String[] { 
+				new String[] {
 					"morph.avaritia.item.ItemSingularity",
-					"thelm.jaopcasingularities.ItemSingularityBase",
+					"thelm.jaopca.singularities.ItemSingularityBase",
 					"wanion.thermsingul.ThermalSingularityItem",
 					"wealthyturtle.uiesingularities.UniversalSingularityItem" },
 					"here is the absolute class name of the Item Classes that must be removed from Infinity Catalyst recipe and inserted into Eternal Singularity.");
@@ -58,7 +59,6 @@ public class CommonProxy {
 	public void postInit() {
 		if (classSet.isEmpty() || ConfigHandler.craftingOnly)
 			return;
-		ExtremeCraftingManager.getInstance().getRecipeList().add(eternalSingularityRecipe);
 		for (final Iterator<Object> catalystRecipeIterator = Recipes.catalyst.getInput().iterator(); catalystRecipeIterator.hasNext();) {
 			final Object input = catalystRecipeIterator.next();
 			if (!(input instanceof ItemStack))
@@ -78,7 +78,6 @@ public class CommonProxy {
 			config.save();
 		final int compoundMax = (int) Math.ceil((float) singularityCount / 9);
 		if (useCompoundSingularities) {
-			//GameRegistry.register(compoundSingularityItem = new CompoundSingularityItem(compoundMax));
 			compoundSingularityItem.max = compoundMax;
 			final List<Object> eternalSingularityRecipeInputs = eternalSingularityRecipe.getInput();
 			for (int i = 0; i < compoundMax; i++) {
