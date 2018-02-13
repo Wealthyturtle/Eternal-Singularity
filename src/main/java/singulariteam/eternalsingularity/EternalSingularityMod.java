@@ -2,6 +2,7 @@ package singulariteam.eternalsingularity;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -29,8 +30,8 @@ public class EternalSingularityMod {
 	public static final CreativeTabs creativeTabs = new CreativeTabs(MOD_ID) {
 		@SideOnly(Side.CLIENT)
 		@Override
-		public Item getTabIconItem() {
-			return EternalSingularityItem.instance;
+		public ItemStack getTabIconItem() {
+			return new ItemStack(EternalSingularityItem.instance);
 		}
 	};
 

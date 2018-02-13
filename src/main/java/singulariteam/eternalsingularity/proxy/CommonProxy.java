@@ -2,9 +2,14 @@ package singulariteam.eternalsingularity.proxy;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import singulariteam.eternalsingularity.EternalRecipeTweaker;
@@ -15,13 +20,18 @@ import singulariteam.eternalsingularity.item.EternalSingularityItem;
 import java.io.File;
 import java.util.*;
 
+import morph.avaritia.recipe.AvaritiaRecipeManager;
 import morph.avaritia.recipe.extreme.ExtremeCraftingManager;
-import morph.avaritia.recipe.extreme.ExtremeShapelessOreRecipe;
+import morph.avaritia.recipe.extreme.ExtremeShapelessRecipe;
+import morph.avaritia.recipe.extreme.IExtremeRecipe;
+//import morph.avaritia.recipe.extreme.ExtremeShapelessOreRecipe;
 import morph.avaritia.handler.ConfigHandler;
-import morph.avaritia.init.Recipes;
+import morph.avaritia.init.ModItems;
+//import morph.avaritia.init.Recipes;
 
 public class CommonProxy {
-	public static final ExtremeShapelessOreRecipe eternalSingularityRecipe = ExtremeCraftingManager.getInstance().addShapelessOreRecipe(new ItemStack(EternalSingularityItem.instance));
+	static NonNullList<Ingredient> singularityIngredients = NonNullList.create();
+	public static final IExtremeRecipe eternalSingularityRecipe = AvaritiaRecipeManager.EXTREME_RECIPES.put(EternalSingularityItem.instance.getRegistryName(), new ExtremeShapelessRecipe(singularityIngredients, new ItemStack(EternalSingularityItem.instance)));
 	private static final Set<Class> classSet = new HashSet<Class>();
 	protected CompoundSingularityItem compoundSingularityItem = null;
 	private File configFile;
@@ -34,6 +44,7 @@ public class CommonProxy {
 		final String[] classNameList = config.getStringList("classNameList", Configuration.CATEGORY_GENERAL,
 				new String[] {
 					"morph.avaritia.item.ItemSingularity",
+					"shadows.singularity.item.ItemSingularity",
 					"thelm.jaopca.singularities.ItemSingularityBase",
 					"wanion.thermsingul.ThermalSingularityItem",
 					"wealthyturtle.uiesingularities.UniversalSingularityItem" },
@@ -47,8 +58,8 @@ public class CommonProxy {
 				EternalSingularityMod.logger.warn("Couldn't find " + className);
 			}
 		}
-		GameRegistry.register(EternalSingularityItem.instance);
-		GameRegistry.register(compoundSingularityItem = new CompoundSingularityItem(16));
+		ForgeRegistries.ITEMS.register(EternalSingularityItem.instance);
+		ForgeRegistries.ITEMS.register(compoundSingularityItem = new CompoundSingularityItem(16));
 		if (Loader.isModLoaded("MineTweaker3"))
 			EternalRecipeTweaker.init();
 	}
@@ -57,20 +68,30 @@ public class CommonProxy {
 
 	@SuppressWarnings("unchecked")
 	public void postInit() {
-		if (classSet.isEmpty() || ConfigHandler.craftingOnly)
+		if (classSet.isEmpty())// || !AvaritiaRecipeManager.EXTREME_RECIPES.containsKey("avaritia:resource"))
 			return;
-		for (final Iterator<Object> catalystRecipeIterator = Recipes.catalyst.getInput().iterator(); catalystRecipeIterator.hasNext();) {
-			final Object input = catalystRecipeIterator.next();
-			if (!(input instanceof ItemStack))
-				continue;
-			final Item item = ((ItemStack) input).getItem();
-			if (item != null && classSet.contains(item.getClass())) {
-				catalystRecipeIterator.remove();
-				eternalSingularityRecipe.getInput().add(((ItemStack) input).copy());
+		
+		IExtremeRecipe catalystRecipe = null;
+		for (IExtremeRecipe recipe : AvaritiaRecipeManager.EXTREME_RECIPES.values()) {
+			if (recipe.getRecipeOutput().isItemEqual(ModItems.infinity_catalyst)) {
+				catalystRecipe = recipe;
+				break;
 			}
 		}
+
+		for (final Iterator<Ingredient> catalystRecipeIterator = catalystRecipe.getIngredients().iterator(); catalystRecipeIterator.hasNext();) {
+			Ingredient inputIngredient = catalystRecipeIterator.next();
+			final ItemStack[] input = inputIngredient.getMatchingStacks();
+			for (ItemStack stack : input) {
+				if (stack.getItem() != null && classSet.contains(stack.getItem().getClass())) {
+					singularityIngredients.add(inputIngredient);
+					break;
+				}
+			}
+		}
+		catalystRecipe.getIngredients().removeAll(singularityIngredients);
 		final Configuration config = new Configuration(configFile);
-		final int singularityCount = eternalSingularityRecipe.getInput().size();
+		final int singularityCount = singularityIngredients.size();
 		final boolean aboveTheLimit = singularityCount > 81;
 		final boolean useCompoundSingularities = config.getBoolean("useCompoundSingularities", Configuration.CATEGORY_GENERAL, aboveTheLimit, "When useCompoundSingularities is Enabled, Basic Singularities will Need to be Crafted into Compound Singularities First.\n[If there are > 81 Basic Singularities, this Config Option will be Set to True Automatically]") || aboveTheLimit;
 		final boolean easyMode = config.getBoolean("easyMode", Configuration.CATEGORY_GENERAL, false, "If this Config Option is Enabled, for Every 9 Singularities Used in the Eternal Singularity Recipe, You will Receive an Additional Eternal Singularity for the Recipe Output.");
@@ -80,9 +101,10 @@ public class CommonProxy {
 		compoundSingularityItem.max = 0;
 		if (useCompoundSingularities) {
 			compoundSingularityItem.max = compoundMax;
-			final List<Object> eternalSingularityRecipeInputs = eternalSingularityRecipe.getInput();
+			final List<Ingredient> eternalSingularityRecipeInputs = eternalSingularityRecipe.getIngredients();
 			for (int i = 0; i < compoundMax; i++) {
-				final ShapelessOreRecipe compoundRecipe = new ShapelessOreRecipe(new ItemStack(compoundSingularityItem, 1, MathHelper.clamp_int(i, 0, 64)));
+				final IRecipe compoundRecipe = new ShapelessRecipes(compoundSingularityItem.getRegistryName().toString() + i, new ItemStack(compoundSingularityItem, 1, MathHelper.clamp(i, 0, 64)), NonNullList.create());
+				//new ItemStack(compoundSingularityItem, 1, MathHelper.clamp(i, 0, 64))
 				for (int s = 0; s < 9; s++) {
 					final int pos = 9 * i + s;
 					if (pos > singularityCount - 1)
@@ -90,17 +112,17 @@ public class CommonProxy {
 					final Object input = eternalSingularityRecipeInputs.get(pos);
 					if (!(input instanceof ItemStack))
 						continue;
-					compoundRecipe.getInput().add(((ItemStack) input).copy());
+					compoundRecipe.getIngredients().add(Ingredient.fromStacks(((ItemStack) input).copy()));
 				}
-				if (compoundRecipe.getInput().size() > 0)
-					GameRegistry.addRecipe(compoundRecipe);
+				if (compoundRecipe.getIngredients().size() > 0)
+					ForgeRegistries.RECIPES.register(compoundRecipe);
 			}
 			eternalSingularityRecipeInputs.clear();
 			for (int i = 0; i < compoundMax; i++)
-				eternalSingularityRecipeInputs.add(new ItemStack(compoundSingularityItem, 1, i));
+				eternalSingularityRecipeInputs.add(Ingredient.fromStacks(new ItemStack(compoundSingularityItem, 1, i)));
 		}
 		if (config.hasChanged())
 			config.save();
-		Recipes.catalyst.getInput().add(new ItemStack(EternalSingularityItem.instance, easyMode ? MathHelper.clamp_int(compoundMax, 1, 64) : 1));
+		catalystRecipe.getIngredients().add(Ingredient.fromStacks(new ItemStack(EternalSingularityItem.instance, easyMode ? MathHelper.clamp(compoundMax, 1, 64) : 1)));
 	}
 }
