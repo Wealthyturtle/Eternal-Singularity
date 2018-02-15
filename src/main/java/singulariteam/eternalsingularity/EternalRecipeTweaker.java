@@ -18,7 +18,7 @@ import java.util.List;
 
 @ZenClass("mods.eternalsingularity")
 public final class EternalRecipeTweaker {
-	private static final List<Ingredient> eternalSingularityRecipe = CommonProxy.eternalSingularityRecipe.getIngredients();
+	private static final List<Ingredient> eternalSingularityRecipe = CommonProxy.singularityIngredients;
 
 	private EternalRecipeTweaker() {
 	}

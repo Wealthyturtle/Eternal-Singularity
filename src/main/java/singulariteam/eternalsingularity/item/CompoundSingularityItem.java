@@ -16,6 +16,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,8 +28,7 @@ import singulariteam.eternalsingularity.render.EternalTextures;
 public class CompoundSingularityItem extends Item implements IHaloRenderItem, ICosmicRenderItem, IModelRegister {
 	public int max;
 
-	public CompoundSingularityItem(final int max)
-	{
+	public CompoundSingularityItem(final int max) {
 		super();
 		setHasSubtypes(true);
 		this.max = max;
@@ -36,23 +36,21 @@ public class CompoundSingularityItem extends Item implements IHaloRenderItem, IC
 		setCreativeTab(EternalSingularityMod.creativeTabs);
 	}
 
-	public EnumRarity getRarity(ItemStack stack)
-	{
+	public EnumRarity getRarity(ItemStack stack) {
 		return EnumRarity.UNCOMMON;
 	}
 
 	@Override
-	public String getUnlocalizedName(final ItemStack stack)
-	{
+	public String getUnlocalizedName(final ItemStack stack) {
 		return "item.combined.singularity." + MathHelper.clamp(getDamage(stack), 0, max);
 	}
 
-	@SuppressWarnings("unchecked")
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, List list)
-	{
-		for (int j = 0; j < max; j++)
-			list.add(new ItemStack(item, 1, j));
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (isInCreativeTab(tab)) {
+			for (int j = 0; j < max; j++)
+				list.add(new ItemStack(this, 1, j));
+		}
 	}
 
 	@Override

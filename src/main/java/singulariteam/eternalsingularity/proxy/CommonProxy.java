@@ -24,13 +24,11 @@ import morph.avaritia.recipe.AvaritiaRecipeManager;
 import morph.avaritia.recipe.extreme.ExtremeCraftingManager;
 import morph.avaritia.recipe.extreme.ExtremeShapelessRecipe;
 import morph.avaritia.recipe.extreme.IExtremeRecipe;
-//import morph.avaritia.recipe.extreme.ExtremeShapelessOreRecipe;
 import morph.avaritia.handler.ConfigHandler;
 import morph.avaritia.init.ModItems;
-//import morph.avaritia.init.Recipes;
 
 public class CommonProxy {
-	static NonNullList<Ingredient> singularityIngredients = NonNullList.create();
+	public static NonNullList<Ingredient> singularityIngredients = NonNullList.create();
 	public static final IExtremeRecipe eternalSingularityRecipe = AvaritiaRecipeManager.EXTREME_RECIPES.put(EternalSingularityItem.instance.getRegistryName(), new ExtremeShapelessRecipe(singularityIngredients, new ItemStack(EternalSingularityItem.instance)));
 	private static final Set<Class> classSet = new HashSet<Class>();
 	protected CompoundSingularityItem compoundSingularityItem = null;
@@ -68,7 +66,7 @@ public class CommonProxy {
 
 	@SuppressWarnings("unchecked")
 	public void postInit() {
-		if (classSet.isEmpty())// || !AvaritiaRecipeManager.EXTREME_RECIPES.containsKey("avaritia:resource"))
+		if (classSet.isEmpty())
 			return;
 		
 		IExtremeRecipe catalystRecipe = null;
@@ -79,9 +77,12 @@ public class CommonProxy {
 			}
 		}
 
-		for (final Iterator<Ingredient> catalystRecipeIterator = catalystRecipe.getIngredients().iterator(); catalystRecipeIterator.hasNext();) {
-			Ingredient inputIngredient = catalystRecipeIterator.next();
+		for (Ingredient inputIngredient : catalystRecipe.getIngredients()) {
 			final ItemStack[] input = inputIngredient.getMatchingStacks();
+			if (inputIngredient.equals(inputIngredient.EMPTY) || input.length == 0) {
+				catalystRecipe.getIngredients().remove(inputIngredient);
+				continue;
+			}
 			for (ItemStack stack : input) {
 				if (stack.getItem() != null && classSet.contains(stack.getItem().getClass())) {
 					singularityIngredients.add(inputIngredient);
@@ -98,28 +99,28 @@ public class CommonProxy {
 		if (config.hasChanged())
 			config.save();
 		final int compoundMax = (int) Math.ceil((float) singularityCount / 9);
-		compoundSingularityItem.max = 0;
 		if (useCompoundSingularities) {
 			compoundSingularityItem.max = compoundMax;
-			final List<Ingredient> eternalSingularityRecipeInputs = eternalSingularityRecipe.getIngredients();
+			final List<Ingredient> eternalSingularityRecipeInputs = singularityIngredients;
 			for (int i = 0; i < compoundMax; i++) {
-				final IRecipe compoundRecipe = new ShapelessRecipes(compoundSingularityItem.getRegistryName().toString() + i, new ItemStack(compoundSingularityItem, 1, MathHelper.clamp(i, 0, 64)), NonNullList.create());
-				//new ItemStack(compoundSingularityItem, 1, MathHelper.clamp(i, 0, 64))
+				NonNullList<Ingredient> compoundIngredients = NonNullList.create();
+				final ShapelessRecipes compoundRecipe = new ShapelessRecipes(compoundSingularityItem.getRegistryName().toString() + i, new ItemStack(compoundSingularityItem, 1, MathHelper.clamp(i, 0, 64)), compoundIngredients);
 				for (int s = 0; s < 9; s++) {
 					final int pos = 9 * i + s;
 					if (pos > singularityCount - 1)
 						break;
-					final Object input = eternalSingularityRecipeInputs.get(pos);
-					if (!(input instanceof ItemStack))
-						continue;
-					compoundRecipe.getIngredients().add(Ingredient.fromStacks(((ItemStack) input).copy()));
+					final Ingredient input = eternalSingularityRecipeInputs.get(pos);
+					compoundIngredients.add(input);
 				}
-				if (compoundRecipe.getIngredients().size() > 0)
+				compoundRecipe.setRegistryName(compoundSingularityItem.getRegistryName().toString() + i);
+				if (compoundIngredients.size() > 0)
 					ForgeRegistries.RECIPES.register(compoundRecipe);
 			}
 			eternalSingularityRecipeInputs.clear();
 			for (int i = 0; i < compoundMax; i++)
 				eternalSingularityRecipeInputs.add(Ingredient.fromStacks(new ItemStack(compoundSingularityItem, 1, i)));
+		} else {
+			compoundSingularityItem.max = 0;
 		}
 		if (config.hasChanged())
 			config.save();
