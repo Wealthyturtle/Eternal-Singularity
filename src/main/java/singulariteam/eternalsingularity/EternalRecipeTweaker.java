@@ -11,13 +11,10 @@ import wanion.lib.common.MineTweakerHelper;
 
 import javax.annotation.Nonnull;
 import java.util.Iterator;
-import java.util.List;
 
 @ZenClass("mods.eternalsingularity")
 public final class EternalRecipeTweaker
 {
-	private static final List<Object> eternalSingularityRecipe = CommonProxy.eternalSingularityRecipe.getInput();
-
 	private EternalRecipeTweaker() {}
 
 	public static void init()
@@ -53,7 +50,7 @@ public final class EternalRecipeTweaker
 		@Override
 		public void apply()
 		{
-			eternalSingularityRecipe.add(itemStack);
+			CommonProxy.getEternalSingularityRecipe().getInput().add(itemStack);
 		}
 
 		@Override
@@ -65,7 +62,7 @@ public final class EternalRecipeTweaker
 		@Override
 		public void undo()
 		{
-			eternalSingularityRecipe.remove(itemStack);
+			CommonProxy.getEternalSingularityRecipe().getInput().remove(itemStack);
 		}
 
 		@Override
@@ -94,7 +91,7 @@ public final class EternalRecipeTweaker
 		private Remove(@Nonnull final ItemStack itemStackToRemove)
 		{
 			ItemStack itemStack = null;
-			for (final Iterator<Object> eternalSingularityRecipeIterator = eternalSingularityRecipe.iterator(); eternalSingularityRecipeIterator.hasNext() && itemStack == null; ) {
+			for (final Iterator<Object> eternalSingularityRecipeIterator = CommonProxy.getEternalSingularityRecipe().getInput().iterator(); eternalSingularityRecipeIterator.hasNext() && itemStack == null; ) {
 				final Object input = eternalSingularityRecipeIterator.next();
 				if (input instanceof ItemStack && ((ItemStack) input).isItemEqual(itemStackToRemove))
 					itemStack = (ItemStack) input;
@@ -105,7 +102,7 @@ public final class EternalRecipeTweaker
 		@Override
 		public void apply()
 		{
-			eternalSingularityRecipe.remove(itemStack);
+			CommonProxy.getEternalSingularityRecipe().getInput().remove(itemStack);
 		}
 
 		@Override
@@ -117,7 +114,7 @@ public final class EternalRecipeTweaker
 		@Override
 		public void undo()
 		{
-			eternalSingularityRecipe.add(itemStack);
+			CommonProxy.getEternalSingularityRecipe().getInput().add(itemStack);
 		}
 
 		@Override
