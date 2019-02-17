@@ -60,15 +60,15 @@ public final class EternalRecipeTweaker {
 	}
 
 	private static class Remove implements IAction {
-		private final ItemStack itemStack;
+		private final Ingredient itemStack;
 
 		private Remove(@Nonnull final ItemStack itemStackToRemove) {
-			ItemStack itemStack = null;
+			Ingredient itemStack = null;
 			for (final Iterator<Ingredient> eternalSingularityRecipeIterator = eternalSingularityRecipe
 					.iterator(); eternalSingularityRecipeIterator.hasNext() && itemStack == null;) {
 				final Object input = eternalSingularityRecipeIterator.next();
-				if (input instanceof ItemStack && ((ItemStack) input).isItemEqual(itemStackToRemove))
-					itemStack = (ItemStack) input;
+				if (input instanceof Ingredient && ((Ingredient) input).test(itemStackToRemove))
+					itemStack = (Ingredient) input;
 			}
 			this.itemStack = itemStack;
 		}
@@ -80,7 +80,7 @@ public final class EternalRecipeTweaker {
 
 		@Override
 		public String describe() {
-			return "Removing " + itemStack.getDisplayName() + " from Eternal Singularity Recipe.";
+			return "Removing " + itemStack.toString() + " from Eternal Singularity Recipe.";
 		}
 	}
 }
