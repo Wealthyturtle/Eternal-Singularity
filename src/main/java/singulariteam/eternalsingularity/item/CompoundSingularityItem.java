@@ -42,7 +42,7 @@ public class CompoundSingularityItem extends Item implements IHaloRenderItem, IC
 
 	@Override
 	public String getUnlocalizedName(final ItemStack stack) {
-		return "item.combined.singularity." + MathHelper.clamp(getDamage(stack), 0, max);
+		return "item.combined.singularity." + getDamage(stack);
 	}
 
 	@Override
