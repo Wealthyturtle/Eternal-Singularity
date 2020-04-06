@@ -82,7 +82,7 @@ public class CommonProxy {
 		if (config.hasChanged())
 			config.save();
 
-		if (catalystRecipe != null) {
+		if (catalystRecipe != null && !catalystRecipe.isShapedRecipe()) {
 			for (Ingredient inputIngredient : catalystRecipe.getIngredients()) {
 				final ItemStack[] input = inputIngredient.getMatchingStacks();
 				if (inputIngredient.equals(inputIngredient.EMPTY) || input.length == 0) {
@@ -97,7 +97,7 @@ public class CommonProxy {
 				}
 			}
 			final int singularityCount = singularityIngredients.size();
-			if (singularityCount == 0) {
+			if (singularityCount == 0 || catalystRecipe.isShapedRecipe()) {
 				AvaritiaRecipeManager.EXTREME_RECIPES.remove(EternalSingularityItem.instance.getRegistryName());
 				if (!useCompoundSingularities) {
 					compoundSingularityItem.max = 0;
