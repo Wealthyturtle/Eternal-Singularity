@@ -56,7 +56,7 @@ public class CommonProxy {
 			}
 		}
 		ForgeRegistries.ITEMS.register(EternalSingularityItem.instance);
-		ForgeRegistries.ITEMS.register(compoundSingularityItem = new CompoundSingularityItem(16));
+		ForgeRegistries.ITEMS.register(compoundSingularityItem = new CompoundSingularityItem(81));
 		if (Loader.isModLoaded("MineTweaker3"))
 			EternalRecipeTweaker.init();
 	}
@@ -108,13 +108,13 @@ public class CommonProxy {
 			catalystRecipe.getIngredients().removeAll(singularityIngredients);
 			final boolean aboveTheLimit = singularityCount > 81;
 			useCompoundSingularities = useCompoundSingularities || aboveTheLimit;
-			final int compoundMax = loadAllCompoundSingularities ? 16 : (int) Math.ceil((float) singularityCount / 9);
+			final int compoundMax = loadAllCompoundSingularities ? 81 : (int) Math.ceil((float) singularityCount / 9);
 			if (useCompoundSingularities) {
 				compoundSingularityItem.max = compoundMax;
 				final List<Ingredient> eternalSingularityRecipeInputs = singularityIngredients;
 				for (int i = 0; i < compoundMax; i++) {
 					NonNullList<Ingredient> compoundIngredients = NonNullList.create();
-					final ShapelessRecipes compoundRecipe = new ShapelessRecipes(compoundSingularityItem.getRegistryName().toString() + i, new ItemStack(compoundSingularityItem, 1, MathHelper.clamp(i, 0, 64)), compoundIngredients);
+					final ShapelessRecipes compoundRecipe = new ShapelessRecipes(compoundSingularityItem.getRegistryName().toString() + i, new ItemStack(compoundSingularityItem, 1, MathHelper.clamp(i, 0, 81)), compoundIngredients);
 					for (int s = 0; s < 9; s++) {
 						final int pos = 9 * i + s;
 						if (pos > singularityCount - 1)
