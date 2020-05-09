@@ -13,102 +13,493 @@
 	},
 	"variants": {
 		"type": {
-			"singularity0": {
-				"textures": {
-					"layer0": "items/combined_singularity_0",
-					"layer1": "items/combined_singularity_0_overlay"
-				}
-			},
-			"singularity1": {
-				"textures": {
-					"layer0": "items/combined_singularity_1",
-					"layer1": "items/combined_singularity_1_overlay"
-				}
-			},
-			"singularity2": {
-				"textures": {
-					"layer0": "items/combined_singularity_2",
-					"layer1": "items/combined_singularity_2_overlay"
-				}
-			},
-			"singularity3": {
-				"textures": {
-					"layer0": "items/combined_singularity_3",
-					"layer1": "items/combined_singularity_3_overlay"
-				}
-			},
-			"singularity4": {
-				"textures": {
-					"layer0": "items/combined_singularity_4",
-					"layer1": "items/combined_singularity_4_overlay"
-				}
-			},
-			"singularity5": {
-				"textures": {
-					"layer0": "items/combined_singularity_5",
-					"layer1": "items/combined_singularity_5_overlay"
-				}
-			},
-			"singularity6": {
-				"textures": {
-					"layer0": "items/combined_singularity_6",
-					"layer1": "items/combined_singularity_6_overlay"
-				}
-			},
-			"singularity7": {
-				"textures": {
-					"layer0": "items/combined_singularity_7",
-					"layer1": "items/combined_singularity_7_overlay"
-				}
-			},
-			"singularity8": {
-				"textures": {
-					"layer0": "items/combined_singularity_8",
-					"layer1": "items/combined_singularity_8_overlay"
-				}
-			},
-			"singularity9": {
-				"textures": {
-					"layer0": "items/combined_singularity_9",
-					"layer1": "items/combined_singularity_9_overlay"
-				}
-			},
-			"singularity10": {
-				"textures": {
-					"layer0": "items/combined_singularity_10",
-					"layer1": "items/combined_singularity_10_overlay"
-				}
-			},
-			"singularity11": {
-				"textures": {
-					"layer0": "items/combined_singularity_11",
-					"layer1": "items/combined_singularity_11_overlay"
-				}
-			},
-			"singularity12": {
-				"textures": {
-					"layer0": "items/combined_singularity_12",
-					"layer1": "items/combined_singularity_12_overlay"
-				}
-			},
-			"singularity13": {
-				"textures": {
-					"layer0": "items/combined_singularity_13",
-					"layer1": "items/combined_singularity_13_overlay"
-				}
-			},
-			"singularity14": {
-				"textures": {
-					"layer0": "items/combined_singularity_14",
-					"layer1": "items/combined_singularity_14_overlay"
-				}
-			},
-			"singularity15": {
-				"textures": {
-					"layer0": "items/combined_singularity_15",
-					"layer1": "items/combined_singularity_15_overlay"
-				}
+"singularity0": {
+"textures": {
+"layer0": "items/combined_singularity_0",
+"layer1": "items/combined_singularity_0_overlay"
+}
+},
+"singularity1": {
+"textures": {
+"layer0": "items/combined_singularity_1",
+"layer1": "items/combined_singularity_1_overlay"
+}
+},
+"singularity2": {
+"textures": {
+"layer0": "items/combined_singularity_2",
+"layer1": "items/combined_singularity_2_overlay"
+}
+},
+"singularity3": {
+"textures": {
+"layer0": "items/combined_singularity_3",
+"layer1": "items/combined_singularity_3_overlay"
+}
+},
+"singularity4": {
+"textures": {
+"layer0": "items/combined_singularity_4",
+"layer1": "items/combined_singularity_4_overlay"
+}
+},
+"singularity5": {
+"textures": {
+"layer0": "items/combined_singularity_5",
+"layer1": "items/combined_singularity_5_overlay"
+}
+},
+"singularity6": {
+"textures": {
+"layer0": "items/combined_singularity_6",
+"layer1": "items/combined_singularity_6_overlay"
+}
+},
+"singularity7": {
+"textures": {
+"layer0": "items/combined_singularity_7",
+"layer1": "items/combined_singularity_7_overlay"
+}
+},
+"singularity8": {
+"textures": {
+"layer0": "items/combined_singularity_8",
+"layer1": "items/combined_singularity_8_overlay"
+}
+},
+"singularity9": {
+"textures": {
+"layer0": "items/combined_singularity_9",
+"layer1": "items/combined_singularity_9_overlay"
+}
+},
+"singularity10": {
+"textures": {
+"layer0": "items/combined_singularity_10",
+"layer1": "items/combined_singularity_10_overlay"
+}
+},
+"singularity11": {
+"textures": {
+"layer0": "items/combined_singularity_11",
+"layer1": "items/combined_singularity_11_overlay"
+}
+},
+"singularity12": {
+"textures": {
+"layer0": "items/combined_singularity_12",
+"layer1": "items/combined_singularity_12_overlay"
+}
+},
+"singularity13": {
+"textures": {
+"layer0": "items/combined_singularity_13",
+"layer1": "items/combined_singularity_13_overlay"
+}
+},
+"singularity14": {
+"textures": {
+"layer0": "items/combined_singularity_14",
+"layer1": "items/combined_singularity_14_overlay"
+}
+},
+"singularity15": {
+"textures": {
+"layer0": "items/combined_singularity_15",
+"layer1": "items/combined_singularity_15_overlay"
+}
+},
+"singularity16": {
+"textures": {
+"layer0": "items/combined_singularity_16",
+"layer1": "items/combined_singularity_16_overlay"
+}
+},
+"singularity17": {
+"textures": {
+"layer0": "items/combined_singularity_17",
+"layer1": "items/combined_singularity_17_overlay"
+}
+},
+"singularity18": {
+"textures": {
+"layer0": "items/combined_singularity_18",
+"layer1": "items/combined_singularity_18_overlay"
+}
+},
+"singularity19": {
+"textures": {
+"layer0": "items/combined_singularity_19",
+"layer1": "items/combined_singularity_19_overlay"
+}
+},
+"singularity20": {
+"textures": {
+"layer0": "items/combined_singularity_20",
+"layer1": "items/combined_singularity_20_overlay"
+}
+},
+"singularity21": {
+"textures": {
+"layer0": "items/combined_singularity_21",
+"layer1": "items/combined_singularity_21_overlay"
+}
+},
+"singularity22": {
+"textures": {
+"layer0": "items/combined_singularity_22",
+"layer1": "items/combined_singularity_22_overlay"
+}
+},
+"singularity23": {
+"textures": {
+"layer0": "items/combined_singularity_23",
+"layer1": "items/combined_singularity_23_overlay"
+}
+},
+"singularity24": {
+"textures": {
+"layer0": "items/combined_singularity_24",
+"layer1": "items/combined_singularity_24_overlay"
+}
+},
+"singularity25": {
+"textures": {
+"layer0": "items/combined_singularity_25",
+"layer1": "items/combined_singularity_25_overlay"
+}
+},
+"singularity26": {
+"textures": {
+"layer0": "items/combined_singularity_26",
+"layer1": "items/combined_singularity_26_overlay"
+}
+},
+"singularity27": {
+"textures": {
+"layer0": "items/combined_singularity_27",
+"layer1": "items/combined_singularity_27_overlay"
+}
+},
+"singularity28": {
+"textures": {
+"layer0": "items/combined_singularity_28",
+"layer1": "items/combined_singularity_28_overlay"
+}
+},
+"singularity29": {
+"textures": {
+"layer0": "items/combined_singularity_29",
+"layer1": "items/combined_singularity_29_overlay"
+}
+},
+"singularity30": {
+"textures": {
+"layer0": "items/combined_singularity_30",
+"layer1": "items/combined_singularity_30_overlay"
+}
+},
+"singularity31": {
+"textures": {
+"layer0": "items/combined_singularity_31",
+"layer1": "items/combined_singularity_31_overlay"
+}
+},
+"singularity32": {
+"textures": {
+"layer0": "items/combined_singularity_32",
+"layer1": "items/combined_singularity_32_overlay"
+}
+},
+"singularity33": {
+"textures": {
+"layer0": "items/combined_singularity_33",
+"layer1": "items/combined_singularity_33_overlay"
+}
+},
+"singularity34": {
+"textures": {
+"layer0": "items/combined_singularity_34",
+"layer1": "items/combined_singularity_34_overlay"
+}
+},
+"singularity35": {
+"textures": {
+"layer0": "items/combined_singularity_35",
+"layer1": "items/combined_singularity_35_overlay"
+}
+},
+"singularity36": {
+"textures": {
+"layer0": "items/combined_singularity_36",
+"layer1": "items/combined_singularity_36_overlay"
+}
+},
+"singularity37": {
+"textures": {
+"layer0": "items/combined_singularity_37",
+"layer1": "items/combined_singularity_37_overlay"
+}
+},
+"singularity38": {
+"textures": {
+"layer0": "items/combined_singularity_38",
+"layer1": "items/combined_singularity_38_overlay"
+}
+},
+"singularity39": {
+"textures": {
+"layer0": "items/combined_singularity_39",
+"layer1": "items/combined_singularity_39_overlay"
+}
+},
+"singularity40": {
+"textures": {
+"layer0": "items/combined_singularity_40",
+"layer1": "items/combined_singularity_40_overlay"
+}
+},
+"singularity41": {
+"textures": {
+"layer0": "items/combined_singularity_41",
+"layer1": "items/combined_singularity_41_overlay"
+}
+},
+"singularity42": {
+"textures": {
+"layer0": "items/combined_singularity_42",
+"layer1": "items/combined_singularity_42_overlay"
+}
+},
+"singularity43": {
+"textures": {
+"layer0": "items/combined_singularity_43",
+"layer1": "items/combined_singularity_43_overlay"
+}
+},
+"singularity44": {
+"textures": {
+"layer0": "items/combined_singularity_44",
+"layer1": "items/combined_singularity_44_overlay"
+}
+},
+"singularity45": {
+"textures": {
+"layer0": "items/combined_singularity_45",
+"layer1": "items/combined_singularity_45_overlay"
+}
+},
+"singularity46": {
+"textures": {
+"layer0": "items/combined_singularity_46",
+"layer1": "items/combined_singularity_46_overlay"
+}
+},
+"singularity47": {
+"textures": {
+"layer0": "items/combined_singularity_47",
+"layer1": "items/combined_singularity_47_overlay"
+}
+},
+"singularity48": {
+"textures": {
+"layer0": "items/combined_singularity_48",
+"layer1": "items/combined_singularity_48_overlay"
+}
+},
+"singularity49": {
+"textures": {
+"layer0": "items/combined_singularity_49",
+"layer1": "items/combined_singularity_49_overlay"
+}
+},
+"singularity50": {
+"textures": {
+"layer0": "items/combined_singularity_50",
+"layer1": "items/combined_singularity_50_overlay"
+}
+},
+"singularity51": {
+"textures": {
+"layer0": "items/combined_singularity_51",
+"layer1": "items/combined_singularity_51_overlay"
+}
+},
+"singularity52": {
+"textures": {
+"layer0": "items/combined_singularity_52",
+"layer1": "items/combined_singularity_52_overlay"
+}
+},
+"singularity53": {
+"textures": {
+"layer0": "items/combined_singularity_53",
+"layer1": "items/combined_singularity_53_overlay"
+}
+},
+"singularity54": {
+"textures": {
+"layer0": "items/combined_singularity_54",
+"layer1": "items/combined_singularity_54_overlay"
+}
+},
+"singularity55": {
+"textures": {
+"layer0": "items/combined_singularity_55",
+"layer1": "items/combined_singularity_55_overlay"
+}
+},
+"singularity56": {
+"textures": {
+"layer0": "items/combined_singularity_56",
+"layer1": "items/combined_singularity_56_overlay"
+}
+},
+"singularity57": {
+"textures": {
+"layer0": "items/combined_singularity_57",
+"layer1": "items/combined_singularity_57_overlay"
+}
+},
+"singularity58": {
+"textures": {
+"layer0": "items/combined_singularity_58",
+"layer1": "items/combined_singularity_58_overlay"
+}
+},
+"singularity59": {
+"textures": {
+"layer0": "items/combined_singularity_59",
+"layer1": "items/combined_singularity_59_overlay"
+}
+},
+"singularity60": {
+"textures": {
+"layer0": "items/combined_singularity_60",
+"layer1": "items/combined_singularity_60_overlay"
+}
+},
+"singularity61": {
+"textures": {
+"layer0": "items/combined_singularity_61",
+"layer1": "items/combined_singularity_61_overlay"
+}
+},
+"singularity62": {
+"textures": {
+"layer0": "items/combined_singularity_62",
+"layer1": "items/combined_singularity_62_overlay"
+}
+},
+"singularity63": {
+"textures": {
+"layer0": "items/combined_singularity_63",
+"layer1": "items/combined_singularity_63_overlay"
+}
+},
+"singularity64": {
+"textures": {
+"layer0": "items/combined_singularity_64",
+"layer1": "items/combined_singularity_64_overlay"
+}
+},
+"singularity65": {
+"textures": {
+"layer0": "items/combined_singularity_65",
+"layer1": "items/combined_singularity_65_overlay"
+}
+},
+"singularity66": {
+"textures": {
+"layer0": "items/combined_singularity_66",
+"layer1": "items/combined_singularity_66_overlay"
+}
+},
+"singularity67": {
+"textures": {
+"layer0": "items/combined_singularity_67",
+"layer1": "items/combined_singularity_67_overlay"
+}
+},
+"singularity68": {
+"textures": {
+"layer0": "items/combined_singularity_68",
+"layer1": "items/combined_singularity_68_overlay"
+}
+},
+"singularity69": {
+"textures": {
+"layer0": "items/combined_singularity_69",
+"layer1": "items/combined_singularity_69_overlay"
+}
+},
+"singularity70": {
+"textures": {
+"layer0": "items/combined_singularity_70",
+"layer1": "items/combined_singularity_70_overlay"
+}
+},
+"singularity71": {
+"textures": {
+"layer0": "items/combined_singularity_71",
+"layer1": "items/combined_singularity_71_overlay"
+}
+},
+"singularity72": {
+"textures": {
+"layer0": "items/combined_singularity_72",
+"layer1": "items/combined_singularity_72_overlay"
+}
+},
+"singularity73": {
+"textures": {
+"layer0": "items/combined_singularity_73",
+"layer1": "items/combined_singularity_73_overlay"
+}
+},
+"singularity74": {
+"textures": {
+"layer0": "items/combined_singularity_74",
+"layer1": "items/combined_singularity_74_overlay"
+}
+},
+"singularity75": {
+"textures": {
+"layer0": "items/combined_singularity_75",
+"layer1": "items/combined_singularity_75_overlay"
+}
+},
+"singularity76": {
+"textures": {
+"layer0": "items/combined_singularity_76",
+"layer1": "items/combined_singularity_76_overlay"
+}
+},
+"singularity77": {
+"textures": {
+"layer0": "items/combined_singularity_77",
+"layer1": "items/combined_singularity_77_overlay"
+}
+},
+"singularity78": {
+"textures": {
+"layer0": "items/combined_singularity_78",
+"layer1": "items/combined_singularity_78_overlay"
+}
+},
+"singularity79": {
+"textures": {
+"layer0": "items/combined_singularity_79",
+"layer1": "items/combined_singularity_79_overlay"
+}
+},
+"singularity80": {
+"textures": {
+"layer0": "items/combined_singularity_80",
+"layer1": "items/combined_singularity_80_overlay"
+}
 			}
+
 		}
 	}
 }
