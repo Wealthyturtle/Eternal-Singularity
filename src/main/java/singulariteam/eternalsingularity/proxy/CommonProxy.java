@@ -57,7 +57,7 @@ public class CommonProxy {
 		}
 		ForgeRegistries.ITEMS.register(EternalSingularityItem.instance);
 		ForgeRegistries.ITEMS.register(compoundSingularityItem = new CompoundSingularityItem(81));
-		if (Loader.isModLoaded("MineTweaker3"))
+		if (Loader.isModLoaded("crafttweaker"))
 			EternalRecipeTweaker.init();
 	}
 
